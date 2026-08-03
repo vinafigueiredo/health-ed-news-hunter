@@ -47,6 +47,10 @@ logging.basicConfig(
 )
 log = logging.getLogger("hunt")
 
+# Fontes que NUNCA passam pelo gate de LLM — o que elas trazem é documento
+# oficial da própria companhia coberta, não notícia sobre ela. Ver o bloco 3d.
+BYPASS_LLM = frozenset({"CVM — Fato Relevante"})
+
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Health & Education News Hunter")
@@ -108,6 +112,18 @@ def main() -> int:
         from hunter.primary_sources import enrich_dou_articles
         enrich_dou_articles(filtered)
 
+    # 3d) A CVM não passa pelo gate. Decisão do Vinicius em 03/ago/2026:
+    #     publicação da CVM de companhia coberta ENTRA, sem julgamento — o
+    #     recorte já foi feito na lista de companhias, e quem decide se o
+    #     documento importa é o analista. Deixar um LLM opinar sobre um Fato
+    #     Relevante da Hapvida é adicionar risco de falso negativo em cima da
+    #     única fonte do feed que é documento oficial da própria companhia.
+    sempre_entram = [a for a in filtered if a.get("source_name") in BYPASS_LLM]
+    if sempre_entram:
+        filtered = [a for a in filtered if a.get("source_name") not in BYPASS_LLM]
+        log.info("Fora do gate de LLM (entram direto): %d de %s",
+                 len(sempre_entram), ", ".join(sorted(BYPASS_LLM)))
+
     # 3c) Despejo para julgamento externo. Sai aqui: não chama API nem grava.
     if args.dump_llm_input:
         import json
@@ -137,6 +153,10 @@ def main() -> int:
     else:
         from hunter.relevance import judge_batch
         relevant = judge_batch(filtered)
+
+    # Reincorpora o que nunca foi ao gate (CVM). Fica no fim da lista, mas o
+    # feed ordena por found_at no banco — a posição aqui não importa.
+    relevant = relevant + sempre_entram
 
     # 5) Grava
     if args.dry_run:

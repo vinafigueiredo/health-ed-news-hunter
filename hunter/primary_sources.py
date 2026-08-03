@@ -286,24 +286,23 @@ CVM_IPE_DIR = "https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/IPE/DADOS/"
 # O fallback abaixo é só rede de segurança caso a listagem fique indisponível.
 CVM_IPE_FALLBACK = CVM_IPE_DIR + "ipe_cia_aberta_{ano}.zip"
 
-# Comparação por SUBSTRING, não igualdade: a CVM escreve variações longas
-# ("Apresentações a analistas/agentes de mercado", "Comunicado ao Mercado -
-# Esclarecimentos sobre consultas CVM/B3"). Igualdade exata descartava tudo.
-CVM_CATEGORIAS = (
-    "FATO RELEVANTE",
-    "COMUNICADO AO MERCADO",
-    "APRESENTACAO A ANALISTAS",
-    "AVISO AOS ACIONISTAS",
-    "REUNIAO PUBLICA COM ANALISTAS",
-    # Acrescentadas em 03/ago/2026. Estavam sendo descartadas e são material de
-    # tese: follow-on, recuperação judicial, partes relacionadas e dívida. O que
-    # fica de fora é ruído societário de alto volume — Assembleia (298 no ano),
-    # Valores Mobiliários art.11 (232), Reunião da Administração (163).
-    "OFERTA DE DISTRIBUICAO PUBLICA",
-    "RECUPERACAO JUDICIAL",
-    "TRANSACAO ENTRE PARTES RELACIONADAS",
-    "ESCRITURAS E ADITAMENTOS DE DEBENTURES",
-)
+# NÃO existe filtro de categoria. Decisão do Vinicius em 03/ago/2026:
+# **se é publicação da CVM de uma companhia da cobertura, tem que estar no
+# feed** — independentemente de a categoria parecer relevante ou não.
+#
+# O raciocínio: o recorte já foi feito na lista de companhias. Uma vez que a
+# empresa é coberta, quem decide se o documento importa é o analista, não um
+# filtro de string nem um LLM. Documento societário que parece burocrático
+# ("Assembleia", "Valores Mobiliários art. 11") é justamente onde aparecem
+# mudança de controle, participação relevante e recompra.
+#
+# Volume medido: 1.317 documentos das ~25 cobertas em 213 dias = ~6/dia.
+# Perfeitamente absorvível. A versão anterior filtrava por 9 categorias e
+# ficava com 308 dos 1.317 — descartava 77% sem ninguém ter decidido isso.
+#
+# Se um dia precisar cortar, corte AQUI e documente o motivo; não volte a
+# filtrar por categoria "relevante" sem falar com o Vinicius.
+CVM_CATEGORIAS_EXCLUIDAS: tuple[str, ...] = ()
 
 # Casamento por substring no nome da companhia (normalizado, sem acento).
 # Mais robusto que a razão social exata, que muda (incorporação, rebrand).
@@ -428,7 +427,7 @@ def collect_cvm() -> list[RawArticle]:
         n_empresa += 1
 
         cat = _norm(r.get("Categoria", ""))
-        if not any(c in cat for c in CVM_CATEGORIAS):
+        if CVM_CATEGORIAS_EXCLUIDAS and any(c in cat for c in CVM_CATEGORIAS_EXCLUIDAS):
             continue
         n_categoria += 1
 

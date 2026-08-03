@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dashboards",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8932",
+        "--directory",
+        "C:\\ans-research\\dashboards"
+      ],
+      "port": 8932
+    }
+  ]
+}
