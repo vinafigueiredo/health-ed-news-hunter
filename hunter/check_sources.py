@@ -67,9 +67,10 @@ def _check_html(src: dict) -> tuple[str, str]:
 
 
 def _check_primary() -> list[tuple[str, str]]:
-    from .primary_sources import collect_cvm, collect_dou
+    from .primary_sources import collect_cvm_com_fallback, collect_dou
     out = []
-    for label, fn in (("DOU — Diário Oficial", collect_dou), ("CVM — Fato Relevante", collect_cvm)):
+    for label, fn in (("DOU — Diário Oficial", collect_dou),
+                      ("CVM — Fato Relevante", collect_cvm_com_fallback)):
         try:
             items = fn()
         except Exception as e:

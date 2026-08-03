@@ -27,6 +27,7 @@ import unicodedata
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 
+import requests
 from bs4 import BeautifulSoup
 
 from .config import PRIMARY_WINDOW_HOURS, WINDOW_HOURS
@@ -318,6 +319,128 @@ CVM_COMPANY_TOKENS = (
 )
 
 
+# ── CVM em tempo real: o PageMethod do RAD ───────────────────────────────────
+# Descoberto em 03/ago/2026. O ZIP de dados abertos atrasa ~1 dia; o RAD é o
+# sistema onde a companhia PROTOCOLA o documento, e ele aparece na consulta em
+# minutos. Medido no dia: documento mais recente no RAD às 15:05, consulta feita
+# às 15:13 — 8 minutos. No ZIP, o mais recente era de dois dias antes.
+#
+# A consulta parecia inviável (ASP.NET WebForms com ViewState), mas por trás do
+# botão há um PageMethod JSON: POST em .../frmConsultaExternaCVM.aspx/
+# ListarDocumentos, `application/json`, sem ViewState e sem cookie obrigatório.
+#
+# ⚠️ CAPTCHA: o formulário TEM reCAPTCHA, hoje desligado — `hdnHabilitaCaptcha`
+# vale 'N' e a resposta traz `SolicitarCaptcha: 'N'`. Se a CVM ligar, a resposta
+# passa a vir com 'S' e este coletor **desiste e loga**, caindo para o ZIP.
+# Não tente resolver o captcha: além de proibido, quebraria a cada mudança.
+RAD_URL = "https://www.rad.cvm.gov.br/ENETWeb/frmConsultaExternaCVM.aspx/ListarDocumentos"
+RAD_BASE = "https://www.rad.cvm.gov.br/ENETWeb/"
+
+# O retorno é um blob delimitado por `$&`, 12 campos por documento, e um novo
+# registro começa com `&*`. Sem essa âncora não dá para segmentar: campo com
+# assunto vazio some e o alinhamento por contagem fixa quebra.
+_RAD_CAMPOS = 12
+_RAD_TAG = re.compile(r"<[^>]+>")
+_RAD_POPUP = re.compile(r"OpenPopUpVer\('([^']+)'\)")
+_RAD_DT = re.compile(r"(\d{2}/\d{2}/\d{4})(?:\s+(\d{2}:\d{2}))?")
+
+
+def _rad_limpo(s: str) -> str:
+    return " ".join(_RAD_TAG.sub(" ", s or "").split())
+
+
+def collect_cvm_rad() -> list[RawArticle]:
+    """Documentos das companhias cobertas, direto do protocolo do RAD."""
+    agora = datetime.now(timezone.utc)
+    ini = agora - timedelta(hours=PRIMARY_WINDOW_HOURS)
+    corpo = {
+        "dataDe": ini.strftime("%d/%m/%Y"), "dataAte": agora.strftime("%d/%m/%Y"),
+        "empresa": "", "setorAtividade": "-1", "categoriaEmissor": "-1",
+        "situacaoEmissor": "-1", "tipoParticipante": "-1", "dataReferencia": "",
+        "categoria": "EST_-1,IPE_-1_-1_-1", "periodo": "2",
+        "horaIni": "00:00", "horaFim": "23:59", "palavraChave": "",
+        "ultimaDtRef": "false", "tipoEmpresa": "0", "token": "", "versaoCaptcha": "",
+    }
+    try:
+        r = requests.post(
+            RAD_URL, data=json.dumps(corpo),
+            headers={"Content-Type": "application/json; charset=utf-8",
+                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0"},
+            timeout=90,
+        )
+        if not r.ok:
+            log.warning("CVM RAD: HTTP %s", r.status_code)
+            return []
+        d = r.json().get("d") or {}
+    except Exception as e:
+        log.warning("CVM RAD falhou: %s", e)
+        return []
+
+    if d.get("SolicitarCaptcha") == "S":
+        log.warning("CVM RAD: a CVM ligou o captcha — caindo para o ZIP de dados abertos.")
+        return []
+    if d.get("temErro"):
+        log.warning("CVM RAD: %s", (d.get("msgErro") or "")[:160])
+        return []
+
+    campos = (d.get("dados") or "").split("$&")
+    inicios = [i for i, c in enumerate(campos) if c.strip().startswith("&*")]
+    if not inicios:
+        log.warning("CVM RAD: retorno sem registros reconhecíveis (%d campos)", len(campos))
+        return []
+
+    out: list[RawArticle] = []
+    n_total = 0
+    for i in inicios:
+        reg = campos[i:i + _RAD_CAMPOS]
+        if len(reg) < 11:
+            continue
+        n_total += 1
+        empresa = _rad_limpo(reg[1])
+        if not any(tok in _norm(empresa) for tok in CVM_COMPANY_TOKENS):
+            continue
+
+        categoria = _rad_limpo(reg[2])
+        tipo = _rad_limpo(reg[3]).strip(" -")
+        assunto = _rad_limpo(reg[4]).strip(" -")
+        m = _RAD_DT.search(_rad_limpo(reg[6]))
+        publicado = None
+        if m:
+            fmt = "%d/%m/%Y %H:%M" if m.group(2) else "%d/%m/%Y"
+            bruto = f"{m.group(1)} {m.group(2)}" if m.group(2) else m.group(1)
+            try:
+                # O RAD carimba em horário de Brasília (UTC-3).
+                publicado = datetime.strptime(bruto, fmt).replace(
+                    tzinfo=timezone(timedelta(hours=-3))
+                ).astimezone(timezone.utc)
+            except ValueError:
+                pass
+
+        popup = _RAD_POPUP.search(reg[10] or "")
+        if not popup:
+            continue
+
+        titulo = f"{empresa} — {categoria}"
+        detalhe = assunto or tipo
+        if detalhe:
+            titulo += f": {detalhe[:180]}"
+
+        out.append(RawArticle(
+            url=RAD_BASE + popup.group(1),
+            domain="rad.cvm.gov.br",
+            source_name="CVM — Fato Relevante",
+            title=titulo,
+            snippet=" | ".join(p for p in (categoria, tipo, assunto) if p)[:400],
+            published_at=publicado,
+            found_at=agora,
+            needs_filter=False,
+        ))
+
+    log.info("CVM RAD: %d documentos no protocolo | %d das cobertas -> %d publicados",
+             n_total, len(out), len(out))
+    return out
+
+
 def _cvm_descobrir_arquivo(ano: int) -> list[str]:
     """Lista o diretório do IPE e devolve as URLs candidatas, do ano corrente.
 
@@ -480,9 +603,26 @@ def collect_cvm() -> list[RawArticle]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+def collect_cvm_com_fallback() -> list[RawArticle]:
+    """RAD primeiro (tempo real); o ZIP de dados abertos é a rede de segurança.
+
+    ⚠️ As duas rotas geram URLs DIFERENTES para o mesmo documento — o RAD usa
+    `NumeroSequencialDocumento` e o ZIP usa `numProtocolo`/`numSequencia`, que
+    são identificadores distintos. Por isso o fallback só dispara quando o RAD
+    devolve VAZIO: rodar os dois sempre duplicaria o feed, e a deduplicação do
+    pipeline é por URL. Se o RAD ficar fora um dia e voltar no outro, alguns
+    documentos podem aparecer duas vezes na virada. É o preço de ter as duas.
+    """
+    itens = collect_cvm_rad()
+    if itens:
+        return itens
+    log.info("CVM: RAD não devolveu nada — tentando o ZIP de dados abertos (atrasa ~1 dia).")
+    return collect_cvm()
+
+
 def collect_primary_sources() -> list[RawArticle]:
     out: list[RawArticle] = []
-    for name, fn in (("DOU", collect_dou), ("CVM", collect_cvm)):
+    for name, fn in (("DOU", collect_dou), ("CVM", collect_cvm_com_fallback)):
         try:
             items = fn()
             out.extend(items)
