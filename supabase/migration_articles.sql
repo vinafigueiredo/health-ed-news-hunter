@@ -36,11 +36,18 @@ ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS published_at     TIMESTAMPT
 ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS found_at         TIMESTAMPTZ NOT NULL DEFAULT now();
 ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS matched_keywords TEXT[] DEFAULT '{}'::TEXT[];
 
+-- Vertical do artigo: 'saude' | 'educacao' | 'ambos' | NULL (indefinida).
+-- Calculada no ingest por hunter/classify.py, a partir das mesmas listas do
+-- config.py. NULL é legítimo: notícia neutra de M&A ou empresa fora das listas.
+-- O dashboard mostra os NULL só na aba "Tudo".
+ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS vertical TEXT;
+
 -- Ordenação do feed é sempre por found_at DESC (não por published_at: fonte sem
 -- data ficaria eternamente no fim). O índice cobre a query da home.
 CREATE INDEX IF NOT EXISTS articles_found_at_idx    ON public.articles (found_at DESC);
 CREATE INDEX IF NOT EXISTS articles_published_at_idx ON public.articles (published_at DESC NULLS LAST);
 CREATE INDEX IF NOT EXISTS articles_source_idx      ON public.articles (source_name);
+CREATE INDEX IF NOT EXISTS articles_vertical_idx    ON public.articles (vertical);
 
 -- ── 2. Runs — alimenta o "sincronizado há X min" do dashboard ────────────────
 CREATE TABLE IF NOT EXISTS public.hunter_runs (

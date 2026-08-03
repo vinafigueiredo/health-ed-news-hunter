@@ -33,7 +33,10 @@ SAUDE_LISTADAS = [
     "Hapvida", "HAPV3", "NotreDame Intermédica", "NotreDame Intermedica",
     "NotreDame Saúde", "Notre Dame Intermédica", "GNDI", "Intermédica",
     # Rede D'Or
-    "Rede D'Or", "Rede D’Or", "Rede DOr", "RDOR3", "Rede D'Or São Luiz",
+    # Quatro variantes de apóstrofo porque cada fonte usa a sua. A U+2018
+    # ("Rede D‘Or") é a que a CVM manda nos títulos do IPE — sem ela, todo
+    # fato relevante da Rede D'Or passava sem casar keyword nenhuma.
+    "Rede D'Or", "Rede D’Or", "Rede D‘Or", "Rede DOr", "RDOR3", "Rede D'Or São Luiz",
     # Fleury
     "Fleury", "FLRY3", "Grupo Fleury",
     # Oncoclínicas
@@ -41,13 +44,16 @@ SAUDE_LISTADAS = [
     # Mater Dei
     "Mater Dei", "MATD3", "Rede Mater Dei",
     # Dasa
-    "Dasa", "DASA3", "Diagnósticos da América",
+    # "Diagnosticos da America" sem acento é como a CVM grafa a razão social
+    # nos títulos do IPE — o matcher é sensível a acento e perdia todo FR da Dasa.
+    "Dasa", "DASA3", "Diagnósticos da América", "Diagnosticos da America",
     # Qualicorp
     "Qualicorp", "QUAL3",
     # Kora Saúde
     "Kora Saúde", "Kora Saude", "SAUD3",
-    # Viveo
-    "Viveo", "VVEO3", "Grupo Viveo",
+    # Viveo — "CM Hospitalar S.A." é a razão social, e é com ela que a empresa
+    # aparece nos documentos da CVM.
+    "Viveo", "VVEO3", "Grupo Viveo", "CM Hospitalar",
     # Blau
     "Blau Farmacêutica", "BLAU3", "Blau",
     # Hypera
@@ -120,7 +126,8 @@ EDUCACAO_EMPRESAS = [
     "CSED3", "Cruzeiro do Sul Educacional", "Cruzeiro do Sul Virtual",
     # Outras
     "FMU", "UNIP", "Universidade Paulista",
-    "Ânima Educação", "Anima Educação", "ANIM3",
+    # "Anima Holding S.A." é a razão social usada nos documentos da CVM.
+    "Ânima Educação", "Anima Educação", "Anima Holding", "ANIM3",
 ]
 
 # ══════════════════════════════════════════════════════════════════════════════

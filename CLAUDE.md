@@ -75,6 +75,44 @@ de lixo. Na dúvida, CONTEXT. Mexeu? **Rode `pytest`** — os 17 testes em
 `tests/test_filter.py` são exatamente os falsos positivos que essa lista
 produziria sem os níveis.
 
+## Vertical (saúde × educação) — coluna `articles.vertical`
+
+Existe desde 03/ago/2026, em `hunter/classify.py`. Valores: `saude`, `educacao`,
+`ambos`, ou `NULL` (indefinida). O dashboard do ans-research filtra por ela.
+
+**Por que no ingest e não no front:** classificar no cliente exigiria duplicar
+estas listas do `config.py` no outro repo. Duplicata desatualiza calada — toda
+empresa nova aqui sumiria do filtro de lá sem ninguém perceber.
+
+Regra: a vertical vem das keywords que casaram. Termo que não está em nenhuma
+lista não vota — isso cobre tanto os neutros (`CADE`, `fusão`, `aquisição`,
+valem para os dois setores) quanto keywords de versões antigas do config que
+ainda vivem em linhas antigas do banco. Sem voto → `NULL`, e o front mostra
+esses itens só na aba "Tudo". **Fonte curada entra com `matched_keywords = []`**
+(pulou o gate), então para ela o `_to_dict` roda o matcher só para achar a
+vertical — sem gravar as keywords, porque `[]` significa "passou sem gate" e
+essa semântica não pode mudar.
+
+Distribuição medida em 753 linhas: saúde 47,7%, educação 31,5%, indefinida 20,8%
+(a maioria CADE e imprensa com keyword só de M&A — corretamente sem vertical).
+
+Mexeu nas listas? Rode `python scripts/backfill_vertical.py` (tem `--dry-run`)
+para reclassificar o histórico. É idempotente.
+
+### A CVM grafa razão social em CAIXA ALTA e sem acento
+
+Custou três empresas já listadas ficarem invisíveis: `DIAGNOSTICOS DA AMERICA`
+(Dasa), `ANIMA HOLDING` (Ânima) e `CM HOSPITALAR` (Viveo). O matcher é
+case-insensitive mas **sensível a acento**, então "Diagnósticos da América" não
+casa "DIAGNOSTICOS DA AMERICA". Pior: a CVM escreve `REDE D‘OR` com **U+2018**,
+que não é nem o apóstrofo reto (U+0027) nem o curvo direito (U+2019).
+
+Resolvido do jeito que o arquivo já resolvia — listando a variante. **Ao
+adicionar empresa nova, cheque como ela aparece nos títulos do IPE da CVM**, não
+só na imprensa. A correção estrutural (normalizar acento no matcher) não foi
+feita para não mudar o comportamento de casamento no fim de uma sessão; se for
+fazer, é em `filter.py:_strong_re` e exige rodar os testes com atenção.
+
 ## Estado verificado ao vivo (30/jul/2026)
 
 Dois diagnósticos reais contra a rede. O que se aprendeu — e que não se descobre

@@ -14,6 +14,7 @@ import re
 import unicodedata
 from functools import lru_cache
 
+from .classify import vertical_de_keywords
 from .config import (
     CASED_KEYWORDS,
     CONTEXT_KEYWORDS,
@@ -112,6 +113,15 @@ def match_keywords(text: str) -> list[str]:
 
 
 def _to_dict(art, matched: list[str]) -> dict:
+    vertical = vertical_de_keywords(matched)
+    if vertical is None:
+        # Fonte curada entra com matched=[] (pulou o gate). Roda o matcher só
+        # para achar a vertical — as keywords NÃO são gravadas, porque `[]` no
+        # banco significa "passou sem gate" e essa semântica não pode mudar.
+        vertical = vertical_de_keywords(
+            match_keywords(f"{art.title or ''} {art.snippet or ''}")
+        )
+
     return {
         "url":              art.url,
         "domain":           art.domain,
@@ -121,6 +131,7 @@ def _to_dict(art, matched: list[str]) -> dict:
         "published_at":     art.published_at.isoformat() if art.published_at else None,
         "found_at":         art.found_at.isoformat(),
         "matched_keywords": matched,
+        "vertical":         vertical,
     }
 
 
