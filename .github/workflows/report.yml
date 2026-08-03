@@ -68,9 +68,12 @@ jobs:
           # resultado só do filtro de keyword — que é exatamente o que se quer
           # inspecionar ao calibrar cobertura.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY_2: ${{ secrets.GROQ_API_KEY_2 }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_API_KEY_2: ${{ secrets.MISTRAL_API_KEY_2 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
         run: |
           {
             echo "# Amostra (dry-run)"
