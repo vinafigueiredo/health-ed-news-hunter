@@ -7,6 +7,42 @@
 
 ---
 
+## −1. ONDE PAROU — sessão de 03/ago/2026
+
+**O sistema está NO AR e rodando sozinho.** Tudo que o §2 abaixo chamava de
+"nunca rodou" rodou. Leia este bloco antes do resto; o que vier depois foi
+escrito em 30/jul e sobrevive só como histórico do raciocínio.
+
+| | |
+|---|---|
+| Repositório | [vinafigueiredo/health-ed-news-hunter](https://github.com/vinafigueiredo/health-ed-news-hunter), público |
+| Automação | `hunt-loop` no Actions, iteração a cada 5 min, cadência medida 5,2–5,5 min |
+| Banco | 4 tabelas de pé no projeto `uhulsnkchmnxsowsxkoc` |
+| Página | https://hcdatahouse.vercel.app/dashboards/noticias.html — no ar |
+| LLM | Groq ×2 + Mistral + Gemini, cascata com backoff e circuit breaker |
+| Testes | 24 passando |
+
+**As três coisas que mais mudaram e que a documentação antiga contradiz:**
+
+1. **A CVM é tempo real** (~8 min), pelo RAD. O `CLAUDE.md` tem seção própria.
+   O §7 abaixo descreve o diagnóstico do ZIP e continua válido para o fallback.
+2. **A CVM não passa pelo gate de LLM** e não tem filtro de categoria.
+3. **Artigo reprovado é registrado** em `judged_urls` — o §9.4b explica.
+
+### O que ficou pendente, em ordem
+
+- **Rodar a limpeza dos 12 documentos duplicados do ZIP.** SQL de uma linha:
+  `delete from public.articles where domain = 'cvm.gov.br';`
+  Os 32 do RAD (`rad.cvm.gov.br`) ficam. Não é urgente, é cosmético.
+- **§9.4c — decidir o rigor do gate.** É decisão do Vinicius, não técnica.
+  Hoje roda com o critério do LLM (~25% de aprovação).
+- **Node 20 nos workflows.** `actions/checkout@v4` e `setup-python@v5` disparam
+  aviso de depreciação. Funciona; trocar quando incomodar.
+- **Não linkados no `ans-research`:** `preco-posicionamento.html` e
+  `ponte-reajuste-mlr.html` seguem untracked e offline, por decisão.
+
+---
+
 ## 0. Resumo em dez linhas
 
 Robô que coleta notícias de saúde suplementar e educação superior privada no
@@ -57,14 +93,16 @@ Limpeza pendente: há uma pasta `.venv` criada por engano em
   com `escapeHtml` em tudo, sem `alert()`, com export CSV e persistência de
   filtros em localStorage protegida por try/catch.
 
-### Nunca rodou
-- Gravação no Supabase (o SQL nunca foi executado).
-- Qualquer workflow do GitHub Actions.
-- A página `noticias.html` nunca foi aberta com dados reais.
-- O gate de relevância por LLM nunca foi exercitado (nenhuma chave configurada).
+### ~~Nunca rodou~~ — TUDO RODOU em 03/ago/2026
+- ~~Gravação no Supabase~~ — 761 linhas na `articles`.
+- ~~Workflows do Actions~~ — `hunt-loop` em laço, `watchdog` passando.
+- ~~A página nunca foi aberta com dados reais~~ — está no ar.
+- ~~O gate de LLM nunca foi exercitado~~ — Groq e Gemini em produção; a Groq
+  chegou a estourar a cota diária e a cascata desviou sozinha.
 
-### Bug aberto, único conhecido
-**CVM devolve 0 documentos.** Ver §7. É o primeiro item da fila.
+### ~~Bug aberto~~ — resolvido
+**CVM devolvia 0 documentos.** Não era bug de filtro: janela curta contra fonte
+que atrasava. Ver §7. Hoje a CVM vem do RAD, em tempo real.
 
 ---
 

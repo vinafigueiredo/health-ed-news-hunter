@@ -154,17 +154,13 @@ candidatas, ele descobre sozinho.
   Sanitária 41, Medicamentos 18, Fumígenos 9, Cosméticos 9). Nenhum veio da
   Colegiada, que é onde nasce RDC. Sem esse recorte, a ANVISA sozinha era 82%
   do volume do DOU e afogava ANS, CADE e SERES.
-- **CVM IPE.** CSV latin-1, separador `;`. Se a CVM renomear coluna, o coletor
-  loga as colunas encontradas e devolve vazio em vez de estourar.
-- **A CVM NÃO é fonte de tempo real.** Medido em 03/ago/2026: o ZIP dos dados
-  abertos é regenerado com ~1 dia de atraso (`Last-Modified` de domingo às 10h
-  GMT numa segunda ao meio-dia; nenhum registro de sábado em diante). A
-  premissa antiga de "sai no minuto do protocolo" é falsa para esta rota — a
-  imprensa chega antes. A CVM vale como confirmação documental, não como
-  antecipação. Por isso as primárias têm janela própria,
-  `PRIMARY_WINDOW_HOURS=168`: com as 72h da imprensa o coletor devolvia 0 em
-  9,4% dos dias sem nada estar quebrado (taxa base real: ~1,5 doc/dia das ~25
-  companhias cobertas, e houve 6 dias seguidos com zero em julho).
+- **A CVM tem DUAS rotas, e a boa é o RAD.** Ver a seção própria abaixo.
+- **CVM IPE (rota de fallback).** CSV latin-1, separador `;`. Se a CVM renomear
+  coluna, o coletor loga as colunas encontradas e devolve vazio em vez de
+  estourar. O ZIP é regenerado com ~1 dia de atraso — medido em 03/ago/2026,
+  `Last-Modified` de domingo 10h GMT numa segunda ao meio-dia. Por isso as
+  primárias têm janela própria, `PRIMARY_WINDOW_HOURS=168`: com as 72h da
+  imprensa o coletor devolvia 0 em 9,4% dos dias sem nada estar quebrado.
 - **Comentário na mesma linha da chave no `.env` vira o valor.** O
   `python-dotenv` só remove comentário inline quando há valor antes dele. Com
   `CEREBRAS_API_KEY=      # https://...`, a chave passou a valer a URL do
@@ -175,6 +171,56 @@ candidatas, ele descobre sozinho.
 - **Console do Windows é cp1252.** Um `→` ou `═` num `print` derruba o processo
   com UnicodeEncodeError (aconteceu). `hunt.py` e `watchdog.py` reconfiguram
   stdout para UTF-8 logo no início; mantenha isso, ou use só ASCII nos logs.
+
+## CVM — as duas rotas (leia antes de mexer no coletor)
+
+Resolvido em 03/ago/2026. A CVM **é** fonte de tempo real, pela rota certa.
+
+| Rota | Defasagem | Papel |
+|---|---|---|
+| **RAD** (`collect_cvm_rad`) | **~8 min** | Principal |
+| ZIP de dados abertos (`collect_cvm`) | ~1 dia | Só se o RAD devolver vazio |
+
+O RAD é onde a companhia **protocola** o documento. Parece inviável — ASP.NET
+WebForms com ViewState —, mas atrás do botão Consultar há um **PageMethod JSON**:
+`POST .../frmConsultaExternaCVM.aspx/ListarDocumentos`, `application/json`, sem
+ViewState e sem cookie obrigatório. O payload exato está em `collect_cvm_rad`.
+
+Duas coisas que custaram tempo e não devem ser redescobertas:
+
+1. **`btnConsulta` tem `name=""`.** Mandar `btnConsulta=Consultar` como campo de
+   formulário não faz nada — ele é gatilho de JavaScript, não campo. Foi o que
+   fez a primeira tentativa (POST de WebForms) voltar com a grade vazia e sem
+   mensagem de erro.
+2. **O formato do retorno.** Blob delimitado por `$&`, **12 campos por
+   documento**, e um registro novo começa com `&*`. Segmentar por contagem fixa
+   quebra quando um documento vem sem assunto — use a âncora `&*`.
+   Campo 1 = empresa, 2 = categoria, 3 = tipo, 4 = assunto, 6 = data/hora de
+   entrega (horário de Brasília), 10 = HTML com o link.
+
+⚠️ **O formulário tem reCAPTCHA, hoje DESLIGADO** (`hdnHabilitaCaptcha='N'`, e a
+resposta traz `SolicitarCaptcha: 'N'`). Se a CVM ligar, o coletor **desiste e
+loga**, caindo para o ZIP. **Não tente resolver o captcha** — além de proibido,
+quebraria a cada mudança do site.
+
+⚠️ **As duas rotas geram URLs DIFERENTES para o mesmo documento** (RAD usa
+`NumeroSequencialDocumento`, ZIP usa `numProtocolo`/`numSequencia`). Como a
+deduplicação do pipeline é por URL, rodar as duas sempre duplicaria o feed —
+por isso o fallback só dispara quando o RAD devolve vazio. Se o RAD ficar fora
+um dia e voltar no outro, alguns documentos aparecem duas vezes na virada.
+Distinguir pelo `domain`: `rad.cvm.gov.br` é RAD, `cvm.gov.br` é ZIP.
+
+## A CVM não passa pelo gate de LLM
+
+Decisão do Vinicius em 03/ago/2026, registrada em `hunt.py` como `BYPASS_LLM`.
+
+**Se é publicação da CVM de companhia coberta, entra — sem julgamento e sem
+filtro de categoria.** O recorte já foi feito na lista de companhias; quem
+decide se o documento importa é o analista. O filtro de categoria anterior
+descartava 1.009 dos 1.317 documentos do ano (77%) — inclusive "Exchange de
+debêntures" da Kora, classificado como "Assembleia". Volume real: ~6/dia.
+
+Não volte a filtrar por categoria "relevante" sem falar com o Vinicius.
 
 ## Secrets esperados
 
