@@ -319,10 +319,32 @@ git. Há incidente registrado (05/jul/2026) de arquivo do `dashboards/` fora do
 tracking derrubando o site no deploy.
 
 ### 9.6 Subir para o GitHub e ligar a automação
-Repositório **público** `health-ed-news-hunter`. Cadastrar os Secrets
-(`SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `GROQ_API_KEY`, `CEREBRAS_API_KEY`,
-`MISTRAL_API_KEY`, `GEMINI_API_KEY`) e habilitar os workflows.
-**Pronto quando:** o `hunt-loop` completar uma iteração e o `watchdog` passar.
+Repositório **público** `vinafigueiredo/health-ed-news-hunter` — criado e com
+push feito em 03/ago/2026. Secrets cadastradas: `SUPABASE_URL`,
+`SUPABASE_SECRET_KEY`, `GROQ_API_KEY`, `GROQ_API_KEY_2`, `MISTRAL_API_KEY`,
+`GEMINI_API_KEY`. O Cerebras virou pago e ficou de fora; chega como string
+vazia e `relevance._keys()` ignora.
+
+⚠️ **Ligue o `hunt-loop` ANTES do `watchdog`.** O watchdog reprova quando o
+último run tem mais de `LIMIAR_RUN` (2h) — então, num repositório recém-criado
+onde o hunter nunca rodou no Actions, ele falha **sempre**, e a mensagem
+("a corrente do hunt-loop quebrou") parece problema de secret. Aconteceu na
+primeira tentativa, 03/ago/2026. O watchdog vigia o hunt-loop; sem hunt-loop
+rodando não há o que vigiar.
+
+Distinguir os dois casos pelo log: secret faltando dá
+`ERRO: SUPABASE_URL / SUPABASE_SECRET_KEY não configurados` e o job dura ~1s;
+limiar estourado dura ~7s porque chegou a consultar o Supabase.
+
+**Pronto quando:** o `hunt-loop` completar uma iteração e o `watchdog` passar
+**depois** dela. ✅ Atingido 03/ago/2026, 17:10 UTC.
+
+**O medo do Cloudflare não se confirmou.** A pegadinha registrada no `CLAUDE.md`
+— sites BR devolvendo 403, ou 200 com página de desafio, para IP de datacenter —
+não apareceu: o primeiro run no Actions coletou **619 itens com 30 de 30 fontes
+respondendo**, contra 615 na máquina local. O fallback `curl_cffi` não precisou
+entrar. Mantenha-o mesmo assim (é barato e o comportamento pode mudar), mas não
+gaste tempo caçando esse fantasma.
 
 ---
 
