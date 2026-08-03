@@ -186,6 +186,11 @@ publishable, que só enxerga o que a RLS permite.
 
 ## Workflow com o Vinicius
 
-- Comandos vão prontos para colar no **CMD do Windows**, em bloco de código,
-  com `cd` incluído. Nunca só descrever o passo.
+- Comandos vão prontos para colar, em bloco de código, com `cd` incluído.
+  Nunca só descrever o passo.
+- **O terminal é PowerShell, não CMD.** No PowerShell 5.1 o `&&` é erro de
+  sintaxe (`O token '&&' não é um separador de instruções válido`) — encadeie
+  com `;` ou use `git -C <caminho> <comando>`. `%VAR%` também não expande; é
+  `$env:VAR`. Aconteceu em 03/ago/2026.
 - Git roda **só** pelo Windows.
+- Python vem do venv direto: `.\.venv\Scripts\python.exe`, sem `activate`.
