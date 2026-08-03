@@ -1,0 +1,6 @@
+requests>=2.31
+feedparser>=6.0
+beautifulsoup4>=4.12
+curl_cffi>=0.7          # TLS de Chrome — necessário p/ Cloudflare a partir do IP do Actions
+python-dotenv>=1.0      # lê o .env local. No Actions as Secrets já vêm como env var;
+                        # sem isto, rodar local ignorava o .env em silêncio.

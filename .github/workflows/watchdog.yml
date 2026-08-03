@@ -1,0 +1,33 @@
+name: watchdog
+
+# Alarme. De hora em hora confere se o hunter está vivo e se alguma fonte ficou
+# muda. Quando o job FALHA, o GitHub manda e-mail para o dono do repo — é o
+# canal de alerta, não há outro.
+#
+# Se este workflow começar a falhar todo dia por uma fonte só, conserte a fonte
+# ou ajuste o limiar em scripts/watchdog.py. Alarme que toca à toa deixa de ser
+# lido, e aí ele não serve para nada.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+
+concurrency:
+  group: watchdog
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Verificar saúde do hunter
+        env:
+          SUPABASE_URL:        ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: python scripts/watchdog.py

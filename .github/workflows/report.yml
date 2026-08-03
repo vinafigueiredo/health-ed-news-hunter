@@ -1,0 +1,93 @@
+name: report
+
+# Diagnóstico que se auto-publica.
+#
+# Existe por um motivo específico: quem mantém este repo com ajuda de um agente
+# não deveria ter que rodar comando no terminal e colar a saída de volta. Este
+# workflow roda a verificação num runner (que TEM internet aberta, ao contrário
+# do sandbox do agente) e faz commit do resultado em `reports/` no próprio repo.
+# Quem quiser ler — pessoa ou agente — só precisa de `git pull`.
+#
+# Dispare pela aba Actions (Run workflow) ou deixe rodar no cron diário.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Rodar também o --dry-run (mostra o que entraria no banco)'
+        type: boolean
+        default: true
+  schedule:
+    - cron: '40 9 * * *'   # 06h40 BRT — depois da edição do DOU do dia
+
+concurrency:
+  group: report
+  cancel-in-progress: true
+
+permissions:
+  contents: write          # necessário para commitar o relatório de volta
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Verificar fontes
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          mkdir -p reports
+          {
+            echo "# Verificação de fontes"
+            echo
+            echo "Executado em: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo "Commit: ${GITHUB_SHA}"
+            echo
+            echo '```'
+          } > reports/check-sources.md
+          # `|| true`: fonte morta faz o comando sair != 0, e o relatório é
+          # justamente para registrar isso — não pode derrubar o job.
+          python hunt.py --check-sources >> reports/check-sources.md 2>&1 || true
+          echo '```' >> reports/check-sources.md
+
+      - name: Amostra do que entraria no banco
+        if: ${{ inputs.dry_run != false }}
+        env:
+          PYTHONIOENCODING: utf-8
+          # Sem chave de LLM o gate fica desligado e o dry-run mostra o
+          # resultado só do filtro de keyword — que é exatamente o que se quer
+          # inspecionar ao calibrar cobertura.
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          {
+            echo "# Amostra (dry-run)"
+            echo
+            echo "Executado em: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            echo
+            echo '```'
+          } > reports/dry-run.md
+          python hunt.py --dry-run >> reports/dry-run.md 2>&1 || true
+          echo '```' >> reports/dry-run.md
+
+      - name: Publicar o relatório no repo
+        run: |
+          git config user.name  "health-ed-news-hunter"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports/
+          # Sem mudança no relatório = nada a commitar; não é erro.
+          git diff --staged --quiet && echo "sem mudanças" && exit 0
+          git commit -m "report: verificação de fontes $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

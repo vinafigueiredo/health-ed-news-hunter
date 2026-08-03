@@ -1,0 +1,72 @@
+name: hunt-loop
+
+# Loop contínuo de coleta.
+#
+# Por que um loop e não um cron de 5 minutos: o cron do GitHub atrasa — às vezes
+# horas — em janelas de baixa prioridade, e `*/5` simplesmente não é honrado. Um
+# único job que roda ~5h30 em laço e no fim dispara a si mesmo dá cadência real.
+# O cron abaixo é só rede de segurança, caso a corrente se quebre.
+#
+# Repo PÚBLICO → Actions gratuito e ilimitado. Se este repo virar privado, este
+# workflow consome os 2.000 min/mês do free tier em pouco mais de um dia:
+# aumente SLEEP_SECONDS para 1800 ou troque para um cron horário.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'   # backup: se o auto-restart falhar, retoma em 30 min
+
+concurrency:
+  group: hunt-loop
+  cancel-in-progress: false   # NÃO cancelar: mataria o run em andamento a cada cron
+
+permissions:
+  actions: write     # necessário para o job disparar a si mesmo
+  contents: read
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350        # teto do GitHub é 360; margem para o restart
+
+    env:
+      SUPABASE_URL:        ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      GROQ_API_KEY:        ${{ secrets.GROQ_API_KEY }}
+      CEREBRAS_API_KEY:    ${{ secrets.CEREBRAS_API_KEY }}
+      MISTRAL_API_KEY:     ${{ secrets.MISTRAL_API_KEY }}
+      GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
+      LOOP_MINUTES:        '320'
+      SLEEP_SECONDS:       '300'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Loop de coleta
+        run: |
+          END=$(( $(date +%s) + LOOP_MINUTES * 60 ))
+          N=0
+          while [ "$(date +%s)" -lt "$END" ]; do
+            N=$((N+1))
+            echo "───────── iteração $N ─────────"
+            python hunt.py || echo "iteração $N falhou — seguindo"
+            [ "$(date +%s)" -ge "$END" ] && break
+            sleep "$SLEEP_SECONDS"
+          done
+          echo "loop encerrado após $N iterações"
+
+      # !cancelled() faz a corrente ressuscitar mesmo quando uma iteração falha.
+      # Sem isso, um erro transitório encerra o hunter até o próximo cron.
+      - name: Reiniciar a corrente
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run hunt-loop.yml --ref "${{ github.ref_name }}"

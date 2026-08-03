@@ -1,0 +1,18 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+
+# Configuração local do Claude Code — específica desta máquina.
+.claude/settings.local.json
+
+# Sondas descartáveis das sessões de diagnóstico de jul/2026. O conhecimento
+# que elas produziram está no CLAUDE.md e no HANDOVER; o código não serve para
+# mais nada e num repo público só confunde quem chega.
+diagnose.py
+diagnostico.txt
+probe2.py
+probe2.txt
