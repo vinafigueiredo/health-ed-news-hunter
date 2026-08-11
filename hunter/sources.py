@@ -53,10 +53,24 @@ SOURCES = [
     {"label": "Agência Brasil", "filter": True, "urls": [         # [OK 10]
         "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml"]},
 
-    # Estadão: TODOS os feeds do domínio principal deram 404 (rss.ece,
-    # /rss/economia.xml, /economia/rss.xml, /feed/) e os subdomínios de seção
-    # entram em loop de redirect. Só o E-Investidor tem RSS vivo. [OK 8]
-    {"label": "Estadão E-Investidor", "filter": True, "urls": [
+    # Estadão. O feed que presta é o do Arc Publishing, a plataforma que eles
+    # usam: /arc/outboundfeeds/rss/. Os caminhos clássicos seguem 404 (rss.ece,
+    # /rss/economia.xml, /feed/) e os subdomínios de seção entram em loop de
+    # redirect — não perca tempo com eles de novo. As variantes de categoria do
+    # próprio Arc (/rss/category/economia/) também são 404; só o geral responde.
+    #
+    # ⚠️ O E-Investidor **está congelado desde 27/05/2026** — responde HTTP 200
+    # com 8 entradas, todas de meses atrás. Era a única candidata configurada, e
+    # por isso o Estadão nunca entregou UM artigo sequer: tudo caía fora da
+    # janela e a fonte parecia apenas "quieta". Fica como segunda candidata caso
+    # volte a publicar; o coletor só chega nela se o Arc falhar.
+    #
+    # Feed morto é pior que feed com erro: erro aparece no --check-sources,
+    # feed velho responde 200 e some em silêncio. Ao ver "0 items (de N
+    # entradas)" no log, cheque a DATA das entradas antes de culpar o filtro.
+    # [Arc OK 100, 98 dentro de 72h, mais recente 12 min — 11/ago/2026]
+    {"label": "Estadão", "filter": True, "urls": [
+        "https://www.estadao.com.br/arc/outboundfeeds/rss/?outputType=xml",
         "https://einvestidor.estadao.com.br/feed/"]},
 
     # G1: os dois feeds respondem com 100 itens, todos com data. O de Educação
