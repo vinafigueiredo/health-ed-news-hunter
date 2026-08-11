@@ -189,6 +189,30 @@ def _fetch_feed(source: dict) -> list[RawArticle]:
     return []
 
 
+def todas_as_fontes(include_primary: bool = True) -> list[str]:
+    """Rótulos de TODA fonte configurada — inclusive as que não entregam nada.
+
+    Existe por causa de um ponto cego real: o `record_source_health` recebia só
+    as fontes que devolveram artigo, então fonte que nunca entrega nunca ganha
+    linha na tabela — e o watchdog, que itera sobre as linhas existentes, não
+    tem como reclamar de algo que não está lá. A checagem "nunca coletou nada"
+    dele era código morto.
+
+    Custou 76 dias de Estadão mudo: o feed do E-Investidor congelou em maio,
+    seguiu respondendo HTTP 200 com entradas velhas, e como nada passava da
+    janela a fonte simplesmente não existia para o monitoramento.
+    """
+    rotulos = {s["label"] for s in SOURCES}
+    try:
+        from .html_scrapers import HTML_SOURCES
+        rotulos |= {s["label"] for s in HTML_SOURCES}
+    except Exception as e:
+        log.warning("não consegui listar os scrapers HTML: %s", e)
+    if include_primary:
+        rotulos |= {"DOU — Diário Oficial", "CVM — Fato Relevante"}
+    return sorted(rotulos)
+
+
 def fetch_all(include_primary: bool = True) -> list[RawArticle]:
     """Coleta tudo em paralelo e devolve a lista deduplicada."""
     articles: list[RawArticle] = []

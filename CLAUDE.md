@@ -206,6 +206,23 @@ candidatas, ele descobre sozinho.
   ~12s por lote levando 401 antes de cair no fail-open. `relevance._key()`
   agora rejeita valor com `#`, espaço ou `://`. Mantenha os comentários do
   `.env.example` em linha separada.
+- **Feed MORTO é pior que feed com ERRO.** Erro aparece vermelho no
+  `--check-sources`. Feed velho responde HTTP 200 com entradas de meses atrás,
+  parece saudável, e tudo cai fora da janela em silêncio. Aconteceu com o
+  Estadão: o E-Investidor congelou em 27/mai e o veículo passou **76 dias sem
+  entregar um artigo**. Ao ver `0 items (de N entradas)` no log, cheque a DATA
+  das entradas antes de culpar o filtro.
+- **Fonte que nunca entrega era invisível para o watchdog.** O
+  `record_source_health` recebia só as fontes com artigo, então quem não
+  entregava não ganhava linha na tabela — e o watchdog, que itera sobre as
+  linhas existentes, não tinha como reclamar de algo ausente. A checagem
+  "nunca coletou nada" dele era código morto. Corrigido em 11/ago/2026:
+  `fetcher.todas_as_fontes()` alimenta o balanço com TODA fonte configurada,
+  as vazias com `last_count=0`.
+  ⚠️ O upsert vai em **dois lotes** de propósito: o PostgREST exige que todo
+  objeto do lote tenha as mesmas chaves, e quem veio vazio não pode levar
+  `last_ok` — com `merge-duplicates`, um `last_ok: null` apagaria o histórico
+  que o watchdog usa para medir silêncio.
 - **Console do Windows é cp1252.** Um `→` ou `═` num `print` derruba o processo
   com UnicodeEncodeError (aconteceu). `hunt.py` e `watchdog.py` reconfiguram
   stdout para UTF-8 logo no início; mantenha isso, ou use só ASCII nos logs.

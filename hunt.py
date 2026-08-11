@@ -73,7 +73,7 @@ def main() -> int:
         return run_check()
 
     from hunter import sync
-    from hunter.fetcher import fetch_all
+    from hunter.fetcher import fetch_all, todas_as_fontes
     from hunter.filter import collapse_serial_articles, filter_articles
 
     # 1) Coleta
@@ -84,7 +84,11 @@ def main() -> int:
             sync.record_run(0, 0)
         return 1
 
-    per_source = Counter(a.source_name for a in raw)
+    # Toda fonte configurada entra no balanço, não só as que entregaram: fonte
+    # que nunca devolve artigo não ganharia linha em `source_health` e ficaria
+    # invisível para o watchdog. Ver fetcher.todas_as_fontes.
+    per_source = Counter({f: 0 for f in todas_as_fontes(not args.no_primary)})
+    per_source.update(a.source_name for a in raw)
 
     # 2) Gate barato (keyword)
     filtered = filter_articles(raw)

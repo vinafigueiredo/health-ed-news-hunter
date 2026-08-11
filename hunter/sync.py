@@ -194,24 +194,35 @@ def record_source_health(counts: dict[str, int]) -> bool:
     if not url or not key or not counts:
         return False
     now = datetime.now(timezone.utc).isoformat()
-    rows = []
-    for source, n in counts.items():
-        row = {"source": source, "last_attempt": now, "last_count": n}
-        if n > 0:
-            row["last_ok"] = now   # em 0, o last_ok antigo é preservado e envelhece
-        rows.append(row)
-    try:
-        r = requests.post(
-            f"{url}/rest/v1/{HEALTH_TABLE}?on_conflict=source",
-            json=rows,
-            headers=_headers({"Prefer": "resolution=merge-duplicates,return=minimal"}),
-            timeout=20,
-        )
-        if not r.ok:
-            log.warning("source_health: HTTP %s — %s", r.status_code, r.text[:160])
-            return False
-        log.info("source_health: %d fontes registradas", len(rows))
-        return True
-    except Exception as e:
-        log.warning("source_health falhou: %s", e)
-        return False
+
+    # DOIS lotes, de propósito. O PostgREST exige que todo objeto de um insert
+    # em lote tenha exatamente as mesmas chaves ("All object keys must match"),
+    # e as linhas diferem: quem entregou leva `last_ok`, quem veio vazio não —
+    # porque com merge-duplicates um `last_ok: null` APAGARIA o histórico da
+    # fonte, que é justamente o dado que o watchdog usa para medir silêncio.
+    com_itens = [{"source": s, "last_attempt": now, "last_count": n, "last_ok": now}
+                 for s, n in counts.items() if n > 0]
+    sem_itens = [{"source": s, "last_attempt": now, "last_count": 0}
+                 for s, n in counts.items() if n <= 0]
+
+    ok = True
+    for rows in (com_itens, sem_itens):
+        if not rows:
+            continue
+        try:
+            r = requests.post(
+                f"{url}/rest/v1/{HEALTH_TABLE}?on_conflict=source",
+                json=rows,
+                headers=_headers({"Prefer": "resolution=merge-duplicates,return=minimal"}),
+                timeout=20,
+            )
+            if not r.ok:
+                log.warning("source_health: HTTP %s — %s", r.status_code, r.text[:160])
+                ok = False
+        except Exception as e:
+            log.warning("source_health falhou: %s", e)
+            ok = False
+
+    log.info("source_health: %d fontes (%d com itens, %d vazias)",
+             len(com_itens) + len(sem_itens), len(com_itens), len(sem_itens))
+    return ok
