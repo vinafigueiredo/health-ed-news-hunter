@@ -39,6 +39,7 @@ LIMIARES = {
     # diárias, alto volume
     "Valor Econômico": 12, "InfoMoney": 12, "Folha de S.Paulo": 12,
     "UOL Economia": 12, "CNN Brasil": 12, "Metrópoles": 12, "Estadão": 12,
+    "O Globo": 12, "Lauro Jardim": 24,
     "Exame": 24, "Money Times": 24, "Poder360": 24, "Agência Brasil": 24,
     # órgãos e fontes primárias — silêncio longo aqui é sintoma real
     "ANS": 72, "ANVISA": 72, "MEC": 72, "CADE": 72, "INEP": 96,

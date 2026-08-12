@@ -82,12 +82,34 @@ def _parse_date(entry) -> Optional[datetime]:
     return None
 
 
+# Perfis tentados em ordem no fallback do curl_cffi. Um bloqueio de WAF
+# (Akamai/Cloudflare) às vezes mira um fingerprint TLS específico — chrome124
+# sozinho ficou preso bloqueado contra o feed novo do Estadão (Arc Publishing)
+# por 14h+ em 12/ago/2026 enquanto o mesmo feed respondia normalmente fora do
+# IP do Actions. Mais de um perfil dá uma segunda chance antes de desistir.
+CURL_CFFI_PROFILES = ("chrome124", "safari17_0")
+
+
+def _curl_cffi_get(url: str, timeout: int):
+    """Tenta os perfis de CURL_CFFI_PROFILES em ordem; devolve o primeiro 200."""
+    from curl_cffi import requests as creq
+    last = None
+    for profile in CURL_CFFI_PROFILES:
+        r = creq.get(url, impersonate=profile, timeout=timeout)
+        log.info("curl_cffi fallback [%s]: HTTP %d", profile, r.status_code)
+        if r.status_code == 200:
+            return r
+        last = r
+    return last
+
+
 def http_get(url: str, timeout: int = TIMEOUT) -> tuple[int, bytes]:
     """GET com fallback para curl_cffi (TLS de Chrome) em 401/403/429.
 
     Vários sites brasileiros usam Cloudflare, que bloqueia o fingerprint TLS do
     `requests` quando a origem é IP de datacenter — exatamente o caso do GitHub
-    Actions. O curl_cffi imita o Chrome e costuma passar.
+    Actions. O curl_cffi imita o Chrome (ou Safari, ver CURL_CFFI_PROFILES) e
+    costuma passar.
     """
     resp = None
     try:
@@ -97,10 +119,9 @@ def http_get(url: str, timeout: int = TIMEOUT) -> tuple[int, bytes]:
     except Exception as e:
         log.debug("requests falhou [%s]: %s", url, e)
     try:
-        from curl_cffi import requests as creq
-        r2 = creq.get(url, impersonate="chrome124", timeout=timeout)
-        log.info("curl_cffi fallback [%s]: HTTP %d", url, r2.status_code)
-        return r2.status_code, r2.content
+        r2 = _curl_cffi_get(url, timeout)
+        if r2 is not None:
+            return r2.status_code, r2.content
     except Exception as e:
         log.debug("curl_cffi indisponível/falhou: %s", e)
     return (resp.status_code, resp.content) if resp is not None else (0, b"")
@@ -123,10 +144,9 @@ def _fetch_feed_url(label: str, url: str, needs_filter: bool) -> list[RawArticle
         # servida como HTML. O fallback do http_get só dispara em 401/403/429,
         # então esse caso passa batido e a fonte some em silêncio.
         try:
-            from curl_cffi import requests as creq
-            r2 = creq.get(url, impersonate="chrome124", timeout=TIMEOUT)
-            feed2 = feedparser.parse(r2.content)
-            if feed2.entries:
+            r2 = _curl_cffi_get(url, TIMEOUT)
+            feed2 = feedparser.parse(r2.content) if r2 is not None else None
+            if feed2 is not None and feed2.entries:
                 log.info("Feed [%s] recuperado via curl_cffi (0 -> %d)", label, len(feed2.entries))
                 feed, n = feed2, len(feed2.entries)
         except Exception:

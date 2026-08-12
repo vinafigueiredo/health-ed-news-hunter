@@ -78,6 +78,17 @@ SOURCES = [
     {"label": "G1 Economia", "filter": True, "urls": [
         "https://g1.globo.com/rss/g1/economia/"]},
 
+    # O Globo (jornal) e a coluna do Lauro Jardim — pedido do Vinicius em
+    # 12/ago/2026, faltavam no conjunto. Achados pela mesma receita do Valor
+    # (feed servido por pox.globo.com, plataforma de RSS do Grupo Globo);
+    # oglobo.globo.com/rss/<seção> também responde, mas o pox costuma ser o
+    # mais estável dos dois. [OK 100 cada, verificado 12/ago/2026]
+    {"label": "O Globo", "filter": True, "urls": [
+        "https://oglobo.globo.com/rss/oglobo",
+        "https://pox.globo.com/rss/oglobo"]},
+    {"label": "Lauro Jardim", "filter": True, "urls": [
+        "https://pox.globo.com/rss/oglobo/blogs/lauro-jardim/"]},
+
     # ══ NEGÓCIOS / DEALS ═════════════════════════════════════════════════════
     # Alto sinal para M&A e mudança de controle — chegam antes de virar matéria
     # nos diários.
