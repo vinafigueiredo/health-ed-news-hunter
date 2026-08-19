@@ -1,69 +1,70 @@
 # Verificação de fontes
 
-Executado em: 2026-08-18 10:01 UTC
-Commit: 6bdf2da874de31e1720d0d30a17586590de801b6
+Executado em: 2026-08-19 10:02 UTC
+Commit: 731f11fe3a60273a267aef35377e56daed445af6
 
 ```
-10:01:28 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
-10:01:28 INFO    curl_cffi fallback [chrome124]: HTTP 403
-10:01:29 INFO    HTML OK [CADE] -> 29 artigos (29 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
-10:01:29 INFO    HTML OK [MEC] -> 15 artigos (0 com data) via https://www.gov.br/mec/pt-br/assuntos/noticias
-10:01:29 INFO    curl_cffi fallback [safari17_0]: HTTP 200
-10:01:29 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
-10:01:29 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
-10:01:29 INFO    HTML OK [INEP] -> 8 artigos (3 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
-10:01:31 INFO    DOU [do1 2026-08-15] -> 0 atos no escopo (de 0)
-10:01:31 INFO    DOU [do1 2026-08-16] -> 0 atos no escopo (de 0)
-10:01:31 INFO    DOU [do1 2026-08-18] -> 4 atos no escopo (de 381)
-10:01:31 INFO    DOU [do1 2026-08-14] -> 4 atos no escopo (de 430)
-10:01:31 INFO    DOU [do1 2026-08-13] -> 5 atos no escopo (de 339)
-10:01:31 INFO    DOU [do1 2026-08-17] -> 4 atos no escopo (de 495)
-10:01:31 INFO    DOU [do1e 2026-08-18] -> 0 atos no escopo (de 0)
-10:01:31 INFO    DOU [do1e 2026-08-17] -> 0 atos no escopo (de 8)
-10:01:31 INFO    DOU [do1 2026-08-12] -> 6 atos no escopo (de 352)
-10:01:31 INFO    DOU [do1e 2026-08-15] -> 0 atos no escopo (de 0)
-10:01:31 INFO    DOU [do1e 2026-08-12] -> 0 atos no escopo (de 2)
-10:01:32 INFO    DOU [do1e 2026-08-13] -> 0 atos no escopo (de 10)
-10:01:32 INFO    DOU [do1e 2026-08-14] -> 0 atos no escopo (de 7)
-10:01:33 INFO    DOU [do1e 2026-08-16] -> 0 atos no escopo (de 0)
-10:01:41 INFO    CVM RAD: 3826 documentos no protocolo | 94 das cobertas -> 94 publicados
+10:02:12 INFO    curl_cffi fallback [chrome124]: HTTP 403
+10:02:12 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
+10:02:13 INFO    HTML OK [CADE] -> 29 artigos (29 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
+10:02:13 INFO    HTML OK [MEC] -> 15 artigos (0 com data) via https://www.gov.br/mec/pt-br/assuntos/noticias
+10:02:13 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
+10:02:13 INFO    curl_cffi fallback [safari17_0]: HTTP 200
+10:02:13 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
+10:02:14 INFO    HTML OK [INEP] -> 8 artigos (3 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
+10:02:15 INFO    DOU [do1 2026-08-19] -> 0 atos no escopo (de 309)
+10:02:15 INFO    DOU [do1 2026-08-17] -> 4 atos no escopo (de 495)
+10:02:15 INFO    DOU [do1e 2026-08-19] -> 0 atos no escopo (de 0)
+10:02:16 INFO    DOU [do1 2026-08-15] -> 0 atos no escopo (de 0)
+10:02:19 INFO    DOU [do1 2026-08-13] -> 5 atos no escopo (de 339)
+10:02:21 INFO    DOU [do1e 2026-08-16] -> 0 atos no escopo (de 0)
+10:02:26 INFO    DOU [do1 2026-08-18] -> 4 atos no escopo (de 381)
+10:02:29 INFO    DOU [do1e 2026-08-18] -> 0 atos no escopo (de 13)
+10:02:33 INFO    DOU [do1e 2026-08-13] -> 0 atos no escopo (de 10)
+10:02:34 INFO    DOU [do1 2026-08-16] -> 0 atos no escopo (de 0)
+10:02:35 INFO    DOU [do1e 2026-08-14] -> 0 atos no escopo (de 7)
+10:02:36 INFO    DOU [do1 2026-08-14] -> 4 atos no escopo (de 430)
+10:02:36 INFO    DOU [do1e 2026-08-15] -> 0 atos no escopo (de 0)
+10:02:52 INFO    curl_cffi fallback [chrome124]: HTTP 200
+10:02:52 INFO    DOU [do1e 2026-08-17] -> 0 atos no escopo (de 8)
+10:03:01 INFO    CVM RAD: 3623 documentos no protocolo | 70 das cobertas -> 70 publicados
 
 ====================================================================================================
 RSS
 ====================================================================================================
 ERRO  ANVISA                       nenhuma candidata serviu: HTTP 404 https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS
-OK    Agência Brasil               items= 10  dated= 10  | Palacete Imperial acumula denúncias de abandon
-OK    Agência Brasil               items= 10  dated= 10  | Petrobras encontra petróleo em poço na Margem 
-OK    Agência Brasil               items= 10  dated= 10  | Uso de medicamento oferecido no SUS reduz caso
-OK    Brazil Journal               items= 10  dated= 10  | Getnet muda de CEO após cinco anos: Cristiane 
-OK    CNN Brasil                   items= 60  dated= 60  | “PQD”, líder do Comando Vermelho, é preso no R
-OK    Estadão                      items=  8  dated=  8  (candidata 2/2)  | Ascenty anuncia investimento de US$ 1,2 bilhão
-OK    Exame                        items= 25  dated= 25  | Pokémon completa 30 anos e mostra por que cont
-OK    Folha de S.Paulo             items=100  dated=100  | Laboratório paraguaio que fabrica emagrecedor 
-OK    Folha de S.Paulo             items=100  dated=100  | Luce, o primeiro veículo elétrico da Ferrari, 
-OK    Folha de S.Paulo             items=100  dated=100  | Mensalidade escolar deve ter aumento de 7% a 1
-OK    Futuro da Saúde              items= 10  dated= 10  | Nova tendência dos peptídeos – Futuro Explica
-OK    G1 Economia                  items=100  dated=100  | Novo pré-sal? O que já se sabe e o que ainda f
-OK    G1 Educação                  items=100  dated=100  | Habilidades socioemocionais impulsionam a form
-OK    Healthcare Management        items=  3  dated=  3  | Conheça os 100 Mais Influentes da Saúde 2026
-OK    InfoMoney                    items= 10  dated= 10  | Anvisa aprova 1º genérico de semaglutida do Br
-OK    InvestNews                   items= 30  dated= 30  | Como o novo CEO da Sony está reformulando a em
-OK    JOTA                         items= 25  dated= 25  | A Mesa de Diálogos do PPI e a oportunidade de 
-OK    Lauro Jardim                 items=100  dated=100  | Na campanha de Lula, revelações sobre Lulinha 
-OK    Medicina S/A                 items= 10  dated= 10  | 84% dos pacientes que descobrem HIV em estágio
-OK    Metrópoles                   items= 20  dated= 20  | "Banco do Pastor” é alvo da PCERJ por golpe de
-OK    Money Times                  items= 10  dated= 10  | El Niño ‘muito forte’: o que está em jogo para
-OK    NeoFeed                      items= 10  dated= 10  | Em guerra com a MP das Blusinhas, varejo press
-OK    O Globo                      items=100  dated=100  (candidata 1/2)  | Tailândia liberta aos 85 anos chefão do tráfic
-OK    Panorama Farmacêutico        items= 20  dated= 20  | Opella anuncia novo head de supply chain
-OK    Poder360                     items= 10  dated= 10  | Time de Israel oferece US$ 100 mil a ex-jogado
-OK    Portal Hospitais Brasil      items= 10  dated= 10  | HIS 2026 destaca o uso de dados e atenção prim
-OK    Saúde Business               items= 10  dated= 10  | O que a aviação pode ensinar à saúde sobre ino
-OK    Setor Saúde                  items= 10  dated= 10  | Rede D’Or renova recorde de faturamento e cres
-OK    Seu Dinheiro                 items= 10  dated= 10  | Lotofácil, Quina e outras loterias começam a s
-OK    UOL Economia                 items= 15  dated=  0  | O nó górdio de 2027: evitar a recessão e arrum
-OK    Valor Econômico              items=100  dated=100  | Camil amplia portfólio de 'snacks' à base de d
-OK    Valor Econômico              items=100  dated=100  | Camil amplia portfólio de 'snacks' à base de d
+OK    Agência Brasil               items= 10  dated= 10  | Dívida bancária do Rio chega a R$ 26 bilhões, 
+OK    Agência Brasil               items= 10  dated= 10  | MEC lança diretrizes para ensino de arte na ed
+OK    Agência Brasil               items= 10  dated= 10  | Mais de 795 mil vacinas contra o sarampo foram
+OK    Brazil Journal               items= 10  dated= 10  | A Pilgrim’s está em seu pior momento. Os Batis
+OK    CNN Brasil                   items= 60  dated= 60  | Acidente entre ônibus e carreta deixa pelo men
+OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Andreazza: Dobradinha Moraes-Dino: não querem 
+OK    Exame                        items= 25  dated= 25  | Como a Petrobras entrou em cena para conter av
+OK    Folha de S.Paulo             items=100  dated=100  | A espiral de Ulam e seus primos
+OK    Folha de S.Paulo             items=100  dated=100  | Como uma empresa que imitou a marca Jordan dri
+OK    Folha de S.Paulo             items=100  dated=100  | Iniciativa permite paciente comparar dados de 
+OK    Futuro da Saúde              items= 10  dated= 10  | Ministério da Saúde regulamenta centrais de di
+OK    G1 Economia                  items=100  dated=100  | Crise do varejo? Por que algumas gigantes estã
+OK    G1 Educação                  items=100  dated=100  | Bom desempenho em matemática pode render bolsa
+OK    Healthcare Management        items=  3  dated=  3  | Ninguém constrói resultados sozinho, afirma pr
+OK    InfoMoney                    items= 10  dated= 10  | As ações e os setores que foram destaques – po
+OK    InvestNews                   items= 30  dated= 30  | Os bastidores da disputa entre Ford e GM na gu
+OK    JOTA                         items= 25  dated= 25  | Salomão assume a presidência do STJ em meio a 
+OK    Lauro Jardim                 items=100  dated=100  | União Brasil e PP lançam 1,3 mil candidatos a 
+OK    Medicina S/A                 items= 10  dated= 10  | Número de brasileiros em diálise cresce 41% em
+OK    Metrópoles                   items= 20  dated= 20  | Confira agenda dos candidatos ao governo de SP
+OK    Money Times                  items= 10  dated= 10  | BrasilAgro (AGRO3) está ‘sempre pronta’ para c
+OK    NeoFeed                      items= 10  dated= 10  | A Flash “não precisava de dinheiro”, mas acaba
+OK    O Globo                      items=100  dated=100  (candidata 1/2)  | 'Atum gigante' de 340 kg é pescado no Reino Un
+OK    Panorama Farmacêutico        items= 20  dated= 20  | Mercado farmacêutico chega a R$ 279,7 bilhões
+OK    Poder360                     items= 10  dated= 10  | Agenda de Lula: leia os compromissos do presid
+OK    Portal Hospitais Brasil      items= 10  dated= 10  | Congresso de Oncologia Américas reúne 1.300 pa
+OK    Saúde Business               items= 10  dated= 10  | A saúde não precisa de mais sistemas. Precisa 
+OK    Setor Saúde                  items= 10  dated= 10  | Semaglutida amplia uso na hepatologia e despon
+OK    Seu Dinheiro                 items= 10  dated= 10  | Bolão e aposta simples dividem prêmio acumulad
+OK    UOL Economia                 items= 15  dated=  0  | Casas Bahia demite 3 mil e plano pode adiar re
+OK    Valor Econômico              items=100  dated=100  | Inflação da zona do euro acelera a 2,9% em jul
+OK    Valor Econômico              items=100  dated=100  | Não se apressem
 
 ====================================================================================================
 SCRAPERS HTML
@@ -72,14 +73,14 @@ OK    ANAHP                             items=  5  dated=  0  | Complexo Hospita
 OK    CADE                              items= 29  dated= 29  | Estão abertas as inscrições para conselheiros e secr
 OK    IESS                              items=  1  dated=  0  | Pôster do Prêmio IESS
 OK    INEP                              items=  8  dated=  3  | Avaliação da Alfabetização
-OK    MEC                               items= 15  dated=  0  | MEC homologa diretrizes para ensino de arte na educa
+OK    MEC                               items= 15  dated=  0  | CNE orienta redes de ensino sobre organização do cal
 VAZIO ANVISA                       0 artigos casaram o href_re — padrão de URL mudou?
 
 ====================================================================================================
 FONTES PRIMÁRIAS
 ====================================================================================================
-OK    DOU — Diário Oficial              items= 23  | Ata — ATA Nº 29, de 17 de agosto de 2026
-OK    CVM — Fato Relevante              items= 94  | VITRU EDUCAÇÃO S.A. — ITR - Informações Trimestrais
+OK    DOU — Diário Oficial              items= 17  | Portaria — PORTARIA SERES/MEC Nº 407, DE 14 DE AGOST
+OK    CVM — Fato Relevante              items= 70  | HOSPITAL MATER DEI S.A. — ITR - Informações Trimestr
 
 ====================================================================================================
 RESUMO: 39 OK · 1 VAZIO · 1 ERRO  (total 41)
