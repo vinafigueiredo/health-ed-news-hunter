@@ -1,69 +1,69 @@
 # Verificação de fontes
 
-Executado em: 2026-09-09 13:52 UTC
-Commit: 44ada8c108339349f518cc1b5a3ac6759c49405b
+Executado em: 2026-09-10 13:46 UTC
+Commit: 9f176d35a6e14ad0565fbf63260fcd8dbf02e6f3
 
 ```
-13:52:37 INFO    curl_cffi fallback [chrome124]: HTTP 403
-13:52:37 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
-13:52:38 WARNING HTML VAZIO [MEC]: nenhuma candidata deu artigo | https://www.gov.br/mec/pt-br/assuntos/noticias -> 0
-13:52:38 INFO    HTML OK [CADE] -> 30 artigos (30 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
-13:52:38 INFO    curl_cffi fallback [safari17_0]: HTTP 200
-13:52:38 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
-13:52:39 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
-13:52:39 INFO    HTML OK [INEP] -> 13 artigos (8 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
-13:52:40 INFO    DOU [do1 2026-09-05] -> 0 atos no escopo (de 0)
-13:52:40 INFO    DOU [do1 2026-09-06] -> 0 atos no escopo (de 0)
-13:52:40 INFO    DOU [do1 2026-09-07] -> 0 atos no escopo (de 0)
-13:52:40 INFO    DOU [do1 2026-09-08] -> 8 atos no escopo (de 531)
-13:52:40 INFO    DOU [do1 2026-09-04] -> 4 atos no escopo (de 368)
-13:52:40 INFO    DOU [do1 2026-09-09] -> 9 atos no escopo (de 393)
-13:52:40 INFO    DOU [do1e 2026-09-09] -> 0 atos no escopo (de 0)
-13:52:40 INFO    DOU [do1e 2026-09-08] -> 0 atos no escopo (de 5)
-13:52:40 INFO    DOU [do1 2026-09-03] -> 4 atos no escopo (de 297)
-13:52:40 INFO    DOU [do1e 2026-09-07] -> 0 atos no escopo (de 0)
-13:52:40 INFO    DOU [do1e 2026-09-06] -> 0 atos no escopo (de 0)
-13:52:41 INFO    DOU [do1e 2026-09-04] -> 0 atos no escopo (de 26)
-13:52:41 INFO    DOU [do1e 2026-09-03] -> 0 atos no escopo (de 9)
-13:52:41 INFO    DOU [do1e 2026-09-05] -> 0 atos no escopo (de 0)
-13:52:48 INFO    CVM RAD: 2274 documentos no protocolo | 32 das cobertas -> 32 publicados
+13:46:47 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
+13:46:47 INFO    curl_cffi fallback [chrome124]: HTTP 403
+13:46:48 INFO    HTML OK [CADE] -> 30 artigos (30 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
+13:46:48 INFO    HTML OK [MEC] -> 15 artigos (15 com data) via https://www.gov.br/mec/pt-br/assuntos/noticias
+13:46:48 INFO    HTML OK [INEP] -> 13 artigos (8 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
+13:46:48 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
+13:46:49 INFO    curl_cffi fallback [safari17_0]: HTTP 200
+13:46:49 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
+13:46:50 INFO    DOU [do1 2026-09-09] -> 9 atos no escopo (de 393)
+13:46:50 INFO    DOU [do1 2026-09-10] -> 20 atos no escopo (de 345)
+13:46:50 INFO    DOU [do1e 2026-09-10] -> 0 atos no escopo (de 0)
+13:46:50 INFO    DOU [do1 2026-09-05] -> 0 atos no escopo (de 0)
+13:46:50 INFO    DOU [do1e 2026-09-08] -> 0 atos no escopo (de 5)
+13:46:51 INFO    DOU [do1 2026-09-07] -> 0 atos no escopo (de 0)
+13:46:51 INFO    DOU [do1 2026-09-06] -> 0 atos no escopo (de 0)
+13:46:51 INFO    DOU [do1e 2026-09-09] -> 0 atos no escopo (de 4)
+13:46:51 INFO    DOU [do1 2026-09-04] -> 4 atos no escopo (de 368)
+13:46:52 INFO    DOU [do1e 2026-09-04] -> 0 atos no escopo (de 26)
+13:46:52 INFO    DOU [do1e 2026-09-07] -> 0 atos no escopo (de 0)
+13:46:52 INFO    DOU [do1e 2026-09-06] -> 0 atos no escopo (de 0)
+13:46:52 INFO    DOU [do1e 2026-09-05] -> 0 atos no escopo (de 0)
+13:46:52 INFO    DOU [do1 2026-09-08] -> 8 atos no escopo (de 531)
+13:46:58 INFO    CVM RAD: 2356 documentos no protocolo | 51 das cobertas -> 51 publicados
 
 ====================================================================================================
 RSS
 ====================================================================================================
 ERRO  ANVISA                       nenhuma candidata serviu: HTTP 404 https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS
-OK    Agência Brasil               items= 10  dated= 10  | Anvisa amplia indicação de vacina contra menin
-OK    Agência Brasil               items= 10  dated= 10  | CVM multa Vorcaro em R$ 20 milhões por fraude 
-OK    Agência Brasil               items= 10  dated= 10  | Feira em SP reúne programas de intercâmbio e b
-OK    Brazil Journal               items= 10  dated= 10  | Com “desglobalização”, Wellington vê mais valo
-OK    CNN Brasil                   items= 60  dated= 60  | Amazon deve captar mais de US$ 5 bi em primeir
-OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Candidato à presidência do Santos diz que club
-OK    Exame                        items= 25  dated= 25  | Suítes no avião, gastronomia e luxo: os próxim
-OK    Folha de S.Paulo             items=100  dated=100  | Escolas ribeirinhas de cidade do Amazonas ganh
-OK    Folha de S.Paulo             items=100  dated=100  | Mesmo com caneta emagrecedora, cirurgia bariát
-OK    Folha de S.Paulo             items=100  dated=100  | Pesquisador que deixou OpenAI e Anthropic diz 
-OK    Futuro da Saúde              items= 10  dated= 10  | Sarampo: avanços e retrocessos – por Renato Kf
-OK    G1 Economia                  items=100  dated=100  | Uber libera vídeo ao vivo para pais em viagens
+OK    Agência Brasil               items= 10  dated= 10  | Brasil melhora desempenho escolar no longo pra
+OK    Agência Brasil               items= 10  dated= 10  | Prevenção ao suicídio: profissionais de saúde 
+OK    Agência Brasil               items= 10  dated= 10  | Setor de serviços fica estável em julho e sobe
+OK    Brazil Journal               items= 10  dated= 10  | O México abriu sua economia. Por que não ficou
+OK    CNN Brasil                   items= 60  dated= 60  | Harry Styles anuncia shows de 2027 e Brasil fi
+OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Horóscopo - Peixes
+OK    Exame                        items= 25  dated= 25  | Streaming representa 76% do consumo nas Smart 
+OK    Folha de S.Paulo             items=100  dated=100  | Bayer aposta em remédio não hormonal para meno
+OK    Folha de S.Paulo             items=100  dated=100  | Misoginia em pauta
+OK    Folha de S.Paulo             items=100  dated=100  | Renault Niagara estreia em novembro e abre nov
+OK    Futuro da Saúde              items= 10  dated= 10  | Enfermagem assume papel estratégico no novo ce
+OK    G1 Economia                  items=100  dated=100  | Ford do Brasil faz recall de Ranger por falha 
 OK    G1 Educação                  items=100  dated=100  | Você acertaria as questões mais fáceis de ciên
 OK    Healthcare Management        items=  3  dated=  3  | Cuidado além da clínica
-OK    InfoMoney                    items= 10  dated= 10  | Renda Fixa Hoje: Confira as taxas de CDBs, LCI
-OK    InvestNews                   items= 30  dated= 30  | Lionel Messi se aproxima de acordo para compra
-OK    JOTA                         items= 25  dated= 25  | Regulação reduziu mercado ilegal de apostas, m
-OK    Lauro Jardim                 items=100  dated=100  | Caso Master supera 1,4 bilhão de visualizações
-OK    Medicina S/A                 items= 10  dated= 10  | Hospital Ernesto Dornelles cria jornada para e
-OK    Metrópoles                   items= 20  dated= 20  | De Brasília a Tóquio: brasiliense se torna cam
-OK    Money Times                  items= 10  dated= 10  | Mini índice do Ibovespa: 190 mil pontos ficam 
-OK    NeoFeed                      items= 10  dated= 10  | Google encontra solução de € 13 bilhões para “
-OK    O Globo                      items=100  dated=100  (candidata 1/2)  | PM faz operações em comunidades da Zona Sudoes
-OK    Panorama Farmacêutico        items= 20  dated= 20  | Usabilidade dos sistemas impacta ritmo de vend
-OK    Poder360                     items= 10  dated= 10  | OAB/DF abre processo contra escritório ligado 
+OK    InfoMoney                    items= 10  dated= 10  | Taxas dos DIs sobem com influência dos Treasur
+OK    InvestNews                   items= 30  dated= 30  | O que uma alta dos juros pelo Fed significa pa
+OK    JOTA                         items= 25  dated= 25  | Com oposição do governo Lula, PEC do BC corre 
+OK    Lauro Jardim                 items=100  dated=100  | Presidente da OAB-DF que abriu apuração contra
+OK    Medicina S/A                 items= 10  dated= 10  | Estudo inédito aplica técnicas menos invasivas
+OK    Metrópoles                   items= 20  dated= 20  | Jovem preso arquitetou fuga de adolescente 13 
+OK    Money Times                  items= 10  dated= 10  | China intensifica internacionalização do yuan 
+OK    NeoFeed                      items= 10  dated= 10  | Comgás entra no mercado de biometano para PMEs
+OK    O Globo                      items=100  dated=100  (candidata 1/2)  | Adolescente de 13 anos é encontrada após desap
+OK    Panorama Farmacêutico        items= 20  dated= 20  | Prati anuncia retorno de executivo
+OK    Poder360                     items= 10  dated= 10  | Lula é desaprovado por 62% do eleitorado de MS
 OK    Portal Hospitais Brasil      items= 10  dated= 10  | Vício em apostas e o avanço dos casos no SUS p
-OK    Saúde Business               items= 10  dated= 10  | IBS e CBS: como a classificação dos produtos i
-OK    Setor Saúde                  items= 10  dated= 10  | Na FEHOSUL, Juliana Brizola assume compromisso
-OK    Seu Dinheiro                 items= 10  dated= 10  | Trabalhadores informais vão conseguir se apose
-OK    UOL Economia                 items= 15  dated=  0  | Amazon capta US$ 5,4 bilhões em títulos em lib
-OK    Valor Econômico              items=100  dated=100  | Análise: A maré está virando para a IA antes d
-OK    Valor Econômico              items=100  dated=100  | Estrangeiros aportam R$ 1,3 bi em ações na B3 
+OK    Saúde Business               items= 10  dated= 10  | HIS 2026 propõe discutir o papel do médico no 
+OK    Setor Saúde                  items= 10  dated= 10  | Hospital Moinhos de Vento realiza primeira cir
+OK    Seu Dinheiro                 items= 10  dated= 10  | CDI, prefixado ou IPCA+? Veja onde investir na
+OK    UOL Economia                 items= 15  dated=  0  | Petrobras volta atrás e cancela reajuste de R$
+OK    Valor Econômico              items=100  dated=100  | Bitcoin recua para abaixo de US$ 77 mil com sa
+OK    Valor Econômico              items=100  dated=100  | Mais de 80% dos estudantes estão proibidos de 
 
 ====================================================================================================
 SCRAPERS HTML
@@ -72,17 +72,17 @@ OK    ANAHP                             items=  5  dated=  0  | Da fragmentaçã
 OK    CADE                              items= 30  dated= 30  | Cade reconhece prática de gun jumping entre Cervejar
 OK    IESS                              items=  1  dated=  0  | Pôster do Prêmio IESS
 OK    INEP                              items= 13  dated=  8  | Avaliação da Alfabetização
+OK    MEC                               items= 15  dated= 15  | Amazonas registra queda na taxa de analfabetismo
 VAZIO ANVISA                       0 artigos casaram o href_re — padrão de URL mudou?
-VAZIO MEC                          0 artigos casaram o href_re — padrão de URL mudou?
 
 ====================================================================================================
 FONTES PRIMÁRIAS
 ====================================================================================================
-OK    DOU — Diário Oficial              items= 25  | Despacho — DESPACHO DECISÓRIO Nº 127/ASSTEC-PRES/PRE
-OK    CVM — Fato Relevante              items= 32  | HAPVIDA PARTICIPAÇÕES E INVESTIMENTOS S.A. — FRE - F
+OK    DOU — Diário Oficial              items= 41  | Despacho — DESPACHO N° 113, DE 8 DE SETEMBRO DE 2026
+OK    CVM — Fato Relevante              items= 51  | CM HOSPITALAR S.A — FRE - Formulário de Referência
 
 ====================================================================================================
-RESUMO: 38 OK · 2 VAZIO · 1 ERRO  (total 41)
+RESUMO: 39 OK · 1 VAZIO · 1 ERRO  (total 41)
 ====================================================================================================
 VAZIO/ERRO não quebram o pipeline, mas somem em silêncio no dia a dia.
 Comente a fonte no arquivo correspondente ou corrija o href_re/URL.
