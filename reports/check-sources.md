@@ -1,32 +1,32 @@
 # Verificação de fontes
 
-Executado em: 2026-10-03 14:24 UTC
-Commit: f6d863affa0b145d59f47520487493834d29cc3c
+Executado em: 2026-10-04 14:57 UTC
+Commit: caa8847462a1d2557656596fa97270d5795bf947
 
 ```
-14:24:40 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
-14:24:40 INFO    curl_cffi fallback [chrome124]: HTTP 403
-14:24:40 WARNING HTML VAZIO [MEC]: nenhuma candidata deu artigo | https://www.gov.br/mec/pt-br/assuntos/noticias -> 0
-14:24:41 INFO    HTML OK [CADE] -> 27 artigos (27 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
-14:24:41 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
-14:24:41 INFO    curl_cffi fallback [safari17_0]: HTTP 200
-14:24:41 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
-14:24:42 INFO    HTML OK [INEP] -> 21 artigos (16 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
-14:24:42 INFO    DOU [do1 2026-10-03] -> 0 atos no escopo (de 0)
-14:24:42 INFO    DOU [do1 2026-10-02] -> 7 atos no escopo (de 415)
-14:24:42 INFO    DOU [do1 2026-09-29] -> 3 atos no escopo (de 339)
-14:24:42 INFO    DOU [do1 2026-10-01] -> 9 atos no escopo (de 293)
-14:24:42 INFO    DOU [do1 2026-09-30] -> 5 atos no escopo (de 435)
-14:24:42 INFO    DOU [do1 2026-09-28] -> 8 atos no escopo (de 578)
-14:24:42 INFO    DOU [do1 2026-09-27] -> 0 atos no escopo (de 0)
-14:24:43 INFO    DOU [do1e 2026-10-01] -> 0 atos no escopo (de 21)
-14:24:43 INFO    DOU [do1e 2026-09-30] -> 0 atos no escopo (de 14)
-14:24:43 INFO    DOU [do1e 2026-10-03] -> 0 atos no escopo (de 0)
-14:24:43 INFO    DOU [do1e 2026-09-28] -> 0 atos no escopo (de 15)
-14:24:43 INFO    DOU [do1e 2026-10-02] -> 0 atos no escopo (de 9)
-14:24:43 INFO    DOU [do1e 2026-09-29] -> 0 atos no escopo (de 12)
-14:24:44 INFO    DOU [do1e 2026-09-27] -> 0 atos no escopo (de 0)
-14:24:51 INFO    CVM RAD: 2251 documentos no protocolo | 27 das cobertas -> 27 publicados
+14:57:59 INFO    curl_cffi fallback [chrome124]: HTTP 403
+14:57:59 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
+14:57:59 WARNING HTML VAZIO [MEC]: nenhuma candidata deu artigo | https://www.gov.br/mec/pt-br/assuntos/noticias -> 0
+14:58:00 INFO    HTML OK [CADE] -> 27 artigos (27 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
+14:58:00 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
+14:58:00 INFO    curl_cffi fallback [safari17_0]: HTTP 200
+14:58:00 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
+14:58:01 INFO    HTML OK [INEP] -> 21 artigos (16 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
+14:58:01 INFO    DOU [do1 2026-10-03] -> 0 atos no escopo (de 0)
+14:58:01 INFO    DOU [do1 2026-10-04] -> 0 atos no escopo (de 0)
+14:58:01 INFO    DOU [do1 2026-10-02] -> 7 atos no escopo (de 415)
+14:58:01 INFO    DOU [do1e 2026-10-04] -> 0 atos no escopo (de 0)
+14:58:01 INFO    DOU [do1e 2026-10-03] -> 0 atos no escopo (de 0)
+14:58:01 INFO    DOU [do1e 2026-10-02] -> 0 atos no escopo (de 9)
+14:58:02 INFO    DOU [do1e 2026-09-30] -> 0 atos no escopo (de 14)
+14:58:03 INFO    DOU [do1e 2026-10-01] -> 0 atos no escopo (de 21)
+14:58:03 INFO    DOU [do1 2026-10-01] -> 9 atos no escopo (de 293)
+14:58:03 INFO    DOU [do1e 2026-09-29] -> 0 atos no escopo (de 12)
+14:58:03 INFO    DOU [do1 2026-09-29] -> 3 atos no escopo (de 339)
+14:58:03 INFO    DOU [do1 2026-09-30] -> 5 atos no escopo (de 435)
+14:58:04 INFO    DOU [do1e 2026-09-28] -> 0 atos no escopo (de 15)
+14:58:05 INFO    DOU [do1 2026-09-28] -> 8 atos no escopo (de 578)
+14:58:11 INFO    CVM RAD: 2251 documentos no protocolo | 27 das cobertas -> 27 publicados
 
 ====================================================================================================
 RSS
@@ -34,36 +34,36 @@ RSS
 ERRO  ANVISA                       nenhuma candidata serviu: HTTP 404 https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS
 OK    Agência Brasil               items= 10  dated= 10  | Anvisa proíbe venda de cosméticos e manda reco
 OK    Agência Brasil               items= 10  dated= 10  | Encceja: Inep disponibiliza locais de reaplica
-OK    Agência Brasil               items= 10  dated= 10  | Preço do limão está acima da média, mesmo na e
-OK    Brazil Journal               items= 10  dated= 10  | OPINIÃO. Que País estamos construindo?
-OK    CNN Brasil                   items= 60  dated= 60  | “Verity”: o manuscrito é real? Entenda o final
-OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Acompanhe em tempo real os lances de Índia x B
-OK    Exame                        items= 25  dated= 25  | Agregador Inteligov/EXAME: Jorginho Mello sobe
-OK    Folha de S.Paulo             items=100  dated=100  | Cursinhos apostam em IA e proteção de crianças
-OK    Folha de S.Paulo             items=100  dated=100  | Lama política e unção religiosa beneficiam suj
-OK    Folha de S.Paulo             items=100  dated=100  | Poluição aumenta risco de Parkinson em pessoas
+OK    Agência Brasil               items= 10  dated= 10  | Petrobras atinge recorde de valor de mercado a
+OK    Brazil Journal               items= 10  dated= 10  | OPINIÃO. Flávio ou Lula? O importante é usar a
+OK    CNN Brasil                   items= 60  dated= 60  | Jornalista Márcio Chaer será velado nesta segu
+OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Vídeo de policiais com denúncia infundada sobr
+OK    Exame                        items= 25  dated= 25  | É possível votar se acabar a luz durante as el
+OK    Folha de S.Paulo             items=100  dated=100  | Aos 60, Unicamp planeja expansão entre os camp
+OK    Folha de S.Paulo             items=100  dated=100  | Investidores buscam proteger carteiras dos ris
+OK    Folha de S.Paulo             items=100  dated=100  | Parar de fumar pode proteger o cérebro contra 
 OK    Futuro da Saúde              items= 10  dated= 10  | Oferta de três terapias oncológicas começa em 
-OK    G1 Economia                  items=100  dated=100  | Países já liberaram 325 milhões de barris de p
-OK    G1 Educação                  items=100  dated=100  | Por que a nova onda de protestos estudantis as
+OK    G1 Economia                  items=100  dated=100  | Como os candidatos pretendem mexer na economia
+OK    G1 Educação                  items=100  dated=100  | Chefe da polícia de Paris afirma que protesto 
 OK    Healthcare Management        items=  3  dated=  3  | Dos 100 Mais Influentes da Saúde, 10 integrarã
-OK    InfoMoney                    items= 10  dated= 10  | Eleições 2026: Pedro Albuquerque vê euforia na
-OK    InvestNews                   items= 30  dated= 30  | Minha semana num microcarro elétrico: alegria,
-OK    JOTA                         items= 25  dated= 25  | Quem são todos os candidatos a deputado federa
-OK    Lauro Jardim                 items=100  dated=100  | Sem indicar candidato às eleições, herdeiro de
+OK    InfoMoney                    items= 10  dated= 10  | Tarcísio: “tenho visto migração de outros cand
+OK    InvestNews                   items= 30  dated= 30  | Distância entre Lula e Flávio no 1º turno vai 
+OK    JOTA                         items= 25  dated= 25  | MPE pede derrubada de site que fornece cola de
+OK    Lauro Jardim                 items=100  dated=100  | Vorcaro foi a velório do pai de Alexandre de M
 OK    Medicina S/A                 items= 10  dated= 10  | Resposta global negligente ao ebola é marca da
-OK    Metrópoles                   items= 20  dated= 20  | Fachin envia ao STJ investigação sobre "gabine
-OK    Money Times                  items= 10  dated= 10  | Presidente do Senado marca para terça votação 
-OK    NeoFeed                      items= 10  dated= 10  | Vozinha defendeu Cabo Verde. Agora, tenta defe
-OK    O Globo                      items=100  dated=100  (candidata 1/2)  | WarnerMount? ParaBros? Empresa formada pela fu
-OK    Panorama Farmacêutico        items= 20  dated= 20  | Prescrições digitais de GLP-1 avançam 304,9% e
-OK    Poder360                     items= 10  dated= 10  | Ao vivo: Flávio e Tarcísio fazem carreata no i
+OK    Metrópoles                   items= 20  dated= 20  | "O que tinha que fazer, foi feito", diz marque
+OK    Money Times                  items= 10  dated= 10  | Inflação e ata do Fed são destaques da semana 
+OK    NeoFeed                      items= 10  dated= 10  | O que a Gastromotiva aprendeu em 20 anos de co
+OK    O Globo                      items=100  dated=100  (candidata 1/2)  | PF apreende R$ 769 mil e conduziu 48 pessoas p
+OK    Panorama Farmacêutico        items= 20  dated= 20  | GLP-1 muda cesta de beleza nas farmácias
+OK    Poder360                     items= 10  dated= 10  | Painel do TSE mostra justificativas de ausênci
 OK    Portal Hospitais Brasil      items= 10  dated= 10  | Vida60+Expo amplia debate sobre longevidade e 
 OK    Saúde Business               items= 10  dated= 10  | Avanço da IA reforça necessidade de rever proc
 OK    Setor Saúde                  items= 10  dated= 10  | Exposição abre a contagem regressiva para o ce
-OK    Seu Dinheiro                 items= 10  dated= 10  | Seu Dinheiro é finalista do Prêmio +Admirados 
-OK    UOL Economia                 items= 15  dated=  0  | Mega-Sena: quanto R$ 82 milhões rendem todo mê
-OK    Valor Econômico              items=100  dated=100  | Copiloto da Flydubai usou machado contra pilot
-OK    Valor Econômico              items=100  dated=100  | Distribuidoras de energia reforçam operação pa
+OK    Seu Dinheiro                 items= 10  dated= 10  | Eleições 2026: como fazer sua ‘colinha’ para v
+OK    UOL Economia                 items= 15  dated=  0  | Indicadores sociais e PIB melhoraram com Lula;
+OK    Valor Econômico              items=100  dated=100  | Como saber onde eu voto?
+OK    Valor Econômico              items=100  dated=100  | Mercado informal já fornece a maioria das dose
 
 ====================================================================================================
 SCRAPERS HTML
