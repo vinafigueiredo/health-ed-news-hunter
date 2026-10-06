@@ -1,88 +1,88 @@
 # Verificação de fontes
 
-Executado em: 2026-10-05 18:48 UTC
-Commit: b09dd8a55d7f7189c58dcfb925351dc161dfa098
+Executado em: 2026-10-06 16:14 UTC
+Commit: 4619af45ddb1914db2294ddb1e3796b246995911
 
 ```
-18:48:22 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
-18:48:23 INFO    curl_cffi fallback [chrome124]: HTTP 403
-18:48:23 INFO    HTML OK [CADE] -> 27 artigos (27 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
-18:48:23 INFO    HTML OK [MEC] -> 15 artigos (4 com data) via https://www.gov.br/mec/pt-br/assuntos/noticias
-18:48:23 INFO    curl_cffi fallback [safari17_0]: HTTP 200
-18:48:23 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
-18:48:23 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
-18:48:24 INFO    HTML OK [INEP] -> 21 artigos (16 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
-18:48:24 INFO    DOU [do1 2026-10-04] -> 0 atos no escopo (de 0)
-18:48:24 INFO    DOU [do1 2026-10-02] -> 7 atos no escopo (de 415)
-18:48:24 INFO    DOU [do1 2026-09-30] -> 5 atos no escopo (de 435)
-18:48:24 INFO    DOU [do1 2026-10-03] -> 0 atos no escopo (de 0)
-18:48:24 INFO    DOU [do1 2026-10-05] -> 24 atos no escopo (de 381)
-18:48:24 INFO    DOU [do1 2026-10-01] -> 9 atos no escopo (de 293)
-18:48:24 INFO    DOU [do1e 2026-10-05] -> 0 atos no escopo (de 0)
-18:48:25 INFO    DOU [do1 2026-09-29] -> 3 atos no escopo (de 339)
-18:48:25 INFO    DOU [do1e 2026-10-02] -> 0 atos no escopo (de 9)
-18:48:25 INFO    DOU [do1e 2026-10-03] -> 0 atos no escopo (de 0)
-18:48:25 INFO    DOU [do1e 2026-10-04] -> 0 atos no escopo (de 0)
-18:48:25 INFO    DOU [do1e 2026-10-01] -> 0 atos no escopo (de 21)
-18:48:26 INFO    DOU [do1e 2026-09-30] -> 0 atos no escopo (de 14)
-18:48:26 INFO    DOU [do1e 2026-09-29] -> 0 atos no escopo (de 12)
-18:48:31 INFO    CVM RAD: 2450 documentos no protocolo | 27 das cobertas -> 27 publicados
+16:14:16 INFO    curl_cffi fallback [chrome124]: HTTP 403
+16:14:16 WARNING HTML VAZIO [MEC]: nenhuma candidata deu artigo | https://www.gov.br/mec/pt-br/assuntos/noticias -> 0
+16:14:16 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
+16:14:16 INFO    HTML OK [CADE] -> 27 artigos (27 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
+16:14:17 INFO    curl_cffi fallback [safari17_0]: HTTP 200
+16:14:17 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
+16:14:17 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
+16:14:17 INFO    HTML OK [INEP] -> 21 artigos (16 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
+16:14:18 INFO    DOU [do1 2026-10-01] -> 9 atos no escopo (de 293)
+16:14:18 INFO    DOU [do1 2026-10-06] -> 9 atos no escopo (de 285)
+16:14:18 INFO    DOU [do1 2026-10-02] -> 7 atos no escopo (de 415)
+16:14:19 INFO    DOU [do1e 2026-10-06] -> 0 atos no escopo (de 0)
+16:14:19 INFO    DOU [do1e 2026-10-05] -> 0 atos no escopo (de 4)
+16:14:19 INFO    DOU [do1e 2026-10-04] -> 0 atos no escopo (de 0)
+16:14:19 INFO    DOU [do1 2026-10-04] -> 0 atos no escopo (de 0)
+16:14:19 INFO    DOU [do1 2026-10-03] -> 0 atos no escopo (de 0)
+16:14:19 INFO    DOU [do1e 2026-10-03] -> 0 atos no escopo (de 0)
+16:14:19 INFO    DOU [do1e 2026-09-30] -> 0 atos no escopo (de 14)
+16:14:20 INFO    DOU [do1 2026-10-05] -> 24 atos no escopo (de 381)
+16:14:20 INFO    DOU [do1e 2026-10-02] -> 0 atos no escopo (de 9)
+16:14:20 INFO    DOU [do1e 2026-10-01] -> 0 atos no escopo (de 21)
+16:14:22 INFO    DOU [do1 2026-09-30] -> 5 atos no escopo (de 435)
+16:14:35 INFO    CVM RAD: 2438 documentos no protocolo | 30 das cobertas -> 30 publicados
 
 ====================================================================================================
 RSS
 ====================================================================================================
 ERRO  ANVISA                       nenhuma candidata serviu: HTTP 404 https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS
-OK    Agência Brasil               items= 10  dated= 10  | Anvisa: veja a lista de cosméticos que podem t
+OK    Agência Brasil               items= 10  dated= 10  | Anvisa libera fabricação de produtos de limpez
+OK    Agência Brasil               items= 10  dated= 10  | BC cria indicador para acompanhar reajustes sa
 OK    Agência Brasil               items= 10  dated= 10  | Encceja: Inep disponibiliza locais de reaplica
-OK    Agência Brasil               items= 10  dated= 10  | Fenabrave: emplacamentos passam de 500 mil e b
-OK    Brazil Journal               items= 10  dated= 10  | Mercado mata a saudade de um Brasil possível
-OK    CNN Brasil                   items= 60  dated= 60  | São Paulo aguarda verba para quitar transfer b
-OK    Estadão                      items=100  dated=100  (candidata 1/2)  | MP dá 72h para Corinthians mostrar dados sobre
-OK    Exame                        items= 25  dated= 25  | 40% das empresas podem desativar agentes de IA
-OK    Folha de S.Paulo             items=100  dated=100  | Folha e Farias Brito liberam simulado gratuito
-OK    Folha de S.Paulo             items=100  dated=100  | IA e robôs se tornam aliados no cuidado de pac
-OK    Folha de S.Paulo             items=100  dated=100  | Serviços do Brasil voltam a contrair em setemb
-OK    Futuro da Saúde              items= 10  dated= 10  | Nobel de Medicina premia avanço na neurociênci
-OK    G1 Economia                  items=100  dated=100  | Trump culpa ataques da Ucrânia à Rússia por al
-OK    G1 Educação                  items=100  dated=100  | Chefe da polícia de Paris afirma que protesto 
+OK    Brazil Journal               items= 10  dated= 10  | OPINIÃO. Projeto Brasil: o império da Sociedad
+OK    CNN Brasil                   items= 60  dated= 60  | Ticiane mostra hematomas em ensaio do “Dança d
+OK    Estadão                      items=100  dated=100  (candidata 1/2)  | 'Estadão' entrevista eleitos e acompanha desdo
+OK    Exame                        items= 25  dated= 25  | Grupo Turn On The Light lança venture capital 
+OK    Folha de S.Paulo             items=100  dated=100  | Cúpula discute integração do ensino superior e
+OK    Folha de S.Paulo             items=100  dated=100  | Google é processado no Reino Unido por taxas d
+OK    Folha de S.Paulo             items=100  dated=100  | Tecnologia não invasiva alivia tremores com um
+OK    Futuro da Saúde              items= 10  dated= 10  | Agentes de IA na saúde: sete perguntas antes d
+OK    G1 Economia                  items=100  dated=100  | Após fim de prazo para saques de recursos nas 
+OK    G1 Educação                  items=100  dated=100  | Alunos e professores protestam na França no ma
 OK    Healthcare Management        items=  3  dated=  3  | Dos 100 Mais Influentes da Saúde, 10 integrarã
-OK    InfoMoney                    items= 10  dated= 10  | Qualcomm e Arm iniciam julgamento sobre royalt
-OK    InvestNews                   items= 30  dated= 30  | Com Flávio à frente, venda de campos da Petrob
-OK    JOTA                         items= 25  dated= 25  | Tarcísio e Michelle terão de decidir entre soc
-OK    Lauro Jardim                 items=100  dated=100  | Debates: ir ou não ir? Campanhas de Flávio Bol
-OK    Medicina S/A                 items= 10  dated= 10  | Panorama do Câncer de Mama aponta que 51% dos 
-OK    Metrópoles                   items= 20  dated= 20  | Candidato a deputado distrital recebeu apenas 
-OK    Money Times                  items= 10  dated= 10  | Brasil nunca viu uma virada no segundo turno d
-OK    NeoFeed                      items= 10  dated= 10  | “Trade Flávio Bolsonaro” destrava a bolsa. Ago
-OK    O Globo                      items=100  dated=100  (candidata 1/2)  | Vasco vai indicar Maracanã à Conmebol para enf
-OK    Panorama Farmacêutico        items= 20  dated= 20  | Transformações no mercado GLP-1 trazem oportun
-OK    Poder360                     items= 10  dated= 10  | Lula reúne aliados em 2 encontros para recalib
+OK    InfoMoney                    items= 10  dated= 10  | Construtoras disparam após rali eleitoral: qua
+OK    InvestNews                   items= 30  dated= 30  | Fábrica de celulose no Brasil pode custar à ch
+OK    JOTA                         items= 25  dated= 25  | Aliados tentam animar Lula, mas reunião expõe 
+OK    Lauro Jardim                 items=100  dated=100  | Caiado declara apoio a Flávio três semanas apó
+OK    Medicina S/A                 items= 10  dated= 10  | IA preenche o espaço entre a consulta e a vida
+OK    Metrópoles                   items= 20  dated= 20  | Mineira Ana Elisa e outros jovens eleitos fala
+OK    Money Times                  items= 10  dated= 10  | O que a XP espera para o Ibovespa depois do fo
+OK    NeoFeed                      items= 10  dated= 10  | Com US$ 64 bilhões em bitcoin, Strategy quer d
+OK    O Globo                      items=100  dated=100  (candidata 1/2)  | 'Revolução dos foguetes': Semana Mundial do Es
+OK    Panorama Farmacêutico        items= 20  dated= 20  | Geolab chega aos 27 anos mirando um novo ciclo
+OK    Poder360                     items= 10  dated= 10  | Trump ordena execução de ex-militar por fuzila
 OK    Portal Hospitais Brasil      items= 10  dated= 10  | Vida60+Expo amplia debate sobre longevidade e 
-OK    Saúde Business               items= 10  dated= 10  | SB.com Entrevista aproxima lideranças dos prin
-OK    Setor Saúde                  items= 10  dated= 10  | Health Law Meeting: Reforma Tributária, robóti
-OK    Seu Dinheiro                 items= 10  dated= 10  | O efeito Flávio Bolsonaro na bolsa: JP Morgan 
-OK    UOL Economia                 items= 15  dated=  0  | Chinesa Huawei e americana Qualcomm fecham aco
-OK    Valor Econômico              items=100  dated=100  | C.H. Robinson fecha compra da RXO por US$ 5,3 
-OK    Valor Econômico              items=100  dated=100  | C.H. Robinson fecha compra da RXO por US$ 5,3 
+OK    Saúde Business               items= 10  dated= 10  | Saber questionar a inteligência artificial é t
+OK    Setor Saúde                  items= 10  dated= 10  | Série Arena Inovação: PHARMDATA usa IA para es
+OK    Seu Dinheiro                 items= 10  dated= 10  | Nem todas surfaram o ‘trade Flávio’: Rede D’Or
+OK    UOL Economia                 items= 15  dated=  0  | Bets saem do ar com R$ 1,32 bilhão de 26,5 mil
+OK    Valor Econômico              items=100  dated=100  | AGU defende proibição das bets e pede nova aud
+OK    Valor Econômico              items=100  dated=100  | Com nova campanha, Bradesco Principal mira alt
 
 ====================================================================================================
 SCRAPERS HTML
 ====================================================================================================
 OK    ANAHP                             items=  5  dated=  0  | Grupo Santa é reconhecido como “Hospital do Futuro” 
-OK    CADE                              items= 27  dated= 27  | Biblioteca do Cade retoma atendimento ao público
+OK    CADE                              items= 27  dated= 27  | Cade abre duas vagas de estágio em Direito e Economi
 OK    IESS                              items=  1  dated=  0  | Pôster do Prêmio IESS
 OK    INEP                              items= 21  dated= 16  | Avaliação da Alfabetização
-OK    MEC                               items= 15  dated=  4  | Projeto gratuito atende pessoas com feridas de difíc
 VAZIO ANVISA                       0 artigos casaram o href_re — padrão de URL mudou?
+VAZIO MEC                          0 artigos casaram o href_re — padrão de URL mudou?
 
 ====================================================================================================
 FONTES PRIMÁRIAS
 ====================================================================================================
-OK    DOU — Diário Oficial              items= 48  | Despacho — DESPACHO DECISÓRIO Nº 31/CGAA6/SGA2/SG/CA
-OK    CVM — Fato Relevante              items= 27  | CRUZEIRO DO SUL EDUCACIONAL S.A. — FRE - Formulário 
+OK    DOU — Diário Oficial              items= 54  | Pauta — PAUTA DA 273ª SESSÃO ORDINÁRIA DE JULGAMENTO
+OK    CVM — Fato Relevante              items= 30  | YDUQS PARTICIPACOES S.A. — FRE - Formulário de Refer
 
 ====================================================================================================
-RESUMO: 39 OK · 1 VAZIO · 1 ERRO  (total 41)
+RESUMO: 38 OK · 2 VAZIO · 1 ERRO  (total 41)
 ====================================================================================================
 VAZIO/ERRO não quebram o pipeline, mas somem em silêncio no dia a dia.
 Comente a fonte no arquivo correspondente ou corrija o href_re/URL.
