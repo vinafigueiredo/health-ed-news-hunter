@@ -1,88 +1,88 @@
 # Verificação de fontes
 
-Executado em: 2026-11-11 17:25 UTC
-Commit: 3c8f32ee83837a7b11386804bc7db7c28de9ceff
+Executado em: 2026-11-12 17:43 UTC
+Commit: 3ba02d80470e408f19c00c2aeb6b7d9b29902093
 
 ```
-17:25:11 INFO    curl_cffi fallback [chrome124]: HTTP 403
-17:25:11 INFO    curl_cffi fallback [safari17_0]: HTTP 403
-17:25:13 WARNING HTML VAZIO [MEC]: nenhuma candidata deu artigo | https://www.gov.br/mec/pt-br/assuntos/noticias -> 0
-17:25:14 INFO    HTML OK [CADE] -> 30 artigos (30 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
-17:25:14 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
-17:25:14 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
-17:25:14 INFO    HTML OK [INEP] -> 10 artigos (5 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
-17:25:16 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
-17:25:16 INFO    DOU [do1 2026-11-09] -> 6 atos no escopo (de 455)
-17:25:16 INFO    DOU [do1 2026-11-11] -> 13 atos no escopo (de 471)
-17:25:16 INFO    DOU [do1 2026-11-10] -> 18 atos no escopo (de 361)
-17:25:16 INFO    DOU [do1e 2026-11-11] -> 0 atos no escopo (de 0)
-17:25:17 INFO    DOU [do1e 2026-11-09] -> 0 atos no escopo (de 28)
-17:25:17 INFO    DOU [do1e 2026-11-10] -> 0 atos no escopo (de 18)
-17:25:17 INFO    DOU [do1 2026-11-05] -> 13 atos no escopo (de 309)
-17:25:17 INFO    DOU [do1 2026-11-08] -> 0 atos no escopo (de 0)
-17:25:17 INFO    DOU [do1e 2026-11-06] -> 0 atos no escopo (de 13)
-17:25:17 INFO    DOU [do1e 2026-11-07] -> 0 atos no escopo (de 0)
-17:25:18 INFO    DOU [do1 2026-11-06] -> 7 atos no escopo (de 333)
-17:25:18 INFO    DOU [do1e 2026-11-05] -> 0 atos no escopo (de 9)
-17:25:25 INFO    DOU [do1e 2026-11-08] -> 0 atos no escopo (de 0)
-17:25:25 INFO    DOU [do1 2026-11-07] -> 0 atos no escopo (de 0)
-17:25:32 INFO    CVM RAD: 4423 documentos no protocolo | 98 das cobertas -> 98 publicados
+17:43:15 INFO    curl_cffi fallback [chrome124]: HTTP 403
+17:43:15 INFO    curl_cffi fallback [safari17_0]: HTTP 403
+17:43:19 INFO    HTML OK [IESS] -> 1 artigos (0 com data) via https://www.iess.org.br/espaco-imprensa/press-release
+17:43:19 INFO    HTML OK [ANAHP] -> 5 artigos (0 com data) via https://www.anahp.com.br/noticias/
+17:43:19 INFO    HTML OK [CADE] -> 30 artigos (30 com data) via https://www.gov.br/cade/pt-br/assuntos/noticias
+17:43:19 INFO    HTML OK [MEC] -> 20 artigos (20 com data) via https://www.gov.br/mec/pt-br/assuntos/noticias
+17:43:19 WARNING HTML VAZIO [ANVISA]: nenhuma candidata deu artigo | https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa -> 0
+17:43:20 INFO    HTML OK [INEP] -> 10 artigos (5 com data) via https://www.gov.br/inep/pt-br/assuntos/noticias
+17:43:21 INFO    DOU [do1 2026-11-08] -> 0 atos no escopo (de 0)
+17:43:21 INFO    DOU [do1 2026-11-07] -> 0 atos no escopo (de 0)
+17:43:21 INFO    DOU [do1 2026-11-12] -> 2 atos no escopo (de 283)
+17:43:21 INFO    DOU [do1 2026-11-10] -> 18 atos no escopo (de 362)
+17:43:21 INFO    DOU [do1 2026-11-11] -> 13 atos no escopo (de 471)
+17:43:21 INFO    DOU [do1e 2026-11-11] -> 0 atos no escopo (de 16)
+17:43:22 INFO    DOU [do1e 2026-11-12] -> 0 atos no escopo (de 1)
+17:43:22 INFO    DOU [do1e 2026-11-10] -> 0 atos no escopo (de 18)
+17:43:22 INFO    DOU [do1e 2026-11-08] -> 0 atos no escopo (de 0)
+17:43:22 INFO    DOU [do1e 2026-11-07] -> 0 atos no escopo (de 0)
+17:43:23 INFO    DOU [do1 2026-11-09] -> 6 atos no escopo (de 455)
+17:43:23 INFO    DOU [do1e 2026-11-06] -> 0 atos no escopo (de 13)
+17:43:23 INFO    DOU [do1e 2026-11-09] -> 0 atos no escopo (de 28)
+17:43:23 INFO    DOU [do1 2026-11-06] -> 7 atos no escopo (de 333)
+17:44:07 INFO    CVM RAD: 4340 documentos no protocolo | 132 das cobertas -> 132 publicados
 
 ====================================================================================================
 RSS
 ====================================================================================================
 ERRO  ANVISA                       nenhuma candidata serviu: HTTP 404 https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/RSS
 ERRO  Futuro da Saúde              nenhuma candidata serviu: HTTP 403 https://futurodasaude.com.br/feed/
-OK    Agência Brasil               items= 10  dated= 10  | Instituto Evandro Chagas comemora 90 anos com 
-OK    Agência Brasil               items= 10  dated= 10  | MEC aprova diretrizes para uso de IA em cada e
-OK    Agência Brasil               items= 10  dated= 10  | Reforma tributária: governo apresentará texto 
-OK    Brazil Journal               items= 15  dated= 15  | Não só o aço: siderúrgicas querem tarifar carr
-OK    CNN Brasil                   items= 60  dated= 60  | Rouquidão e desgaste vocal: por que a voz de L
-OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Nvidia perde US$ 1,08 trilhão em oito pregões,
-OK    Exame                        items= 25  dated= 25  | Como a busca por longevidade está redesenhando
-OK    Folha de S.Paulo             items=100  dated=100  | Covid avança no Brasil com predominância da ce
-OK    Folha de S.Paulo             items=100  dated=100  | Festival de compras na China testa potencial d
-OK    Folha de S.Paulo             items=100  dated=100  | Saiba o que revisar em matemática e ciências d
-OK    G1 Economia                  items=100  dated=100  | Fiat mostra Argo X e revela detalhes do novo v
-OK    G1 Educação                  items=100  dated=100  | Questão do Enem sobre misoginia em sermões med
-OK    Healthcare Management        items=  3  dated=  3  | Roche Diagnóstica nomeia Renato Arruda como no
-OK    InfoMoney                    items= 10  dated= 10  | Consumidores podem acumular milhas Latam em co
-OK    InvestNews                   items= 30  dated= 30  | Reforma tributária e nova CBS: Receita diz não
-OK    JOTA                         items= 25  dated= 25  | O contraditório interno de Og Fernandes: a esc
-OK    Lauro Jardim                 items=100  dated=100  | A nova sede da EBC em São Paulo
-OK    Medicina S/A                 items= 10  dated= 10  | Exposição à seca na gestação eleva chance de p
-OK    Metrópoles                   items= 20  dated= 20  | Pochettino tem acordo verbal para assumir coma
-OK    Money Times                  items= 10  dated= 10  | Bolsas da Europa fecham em alta com recuperaçã
-OK    NeoFeed                      items= 10  dated= 10  | El Niño pode “esquentar” a inflação para até 6
-OK    O Globo                      items=100  dated=100  (candidata 1/2)  | Mundial de Corrida de Rua, se for no Brasil, t
-OK    Panorama Farmacêutico        items= 10  dated= 10  | Festa de Prêmios da Rede MasterFarma termina c
-OK    Poder360                     items= 10  dated= 10  | Gilmar sai em defesa de Andrei e diz que mudan
+OK    Agência Brasil               items= 10  dated= 10  | Anvisa manda recolher lotes de insumos para ca
+OK    Agência Brasil               items= 10  dated= 10  | Conheça as novas diretrizes da educação profis
+OK    Agência Brasil               items= 10  dated= 10  | Petrobras faz acordo para deter 100% da transp
+OK    Brazil Journal               items= 15  dated= 15  | OPINIÃO. Quando o trade de AI fraqueja, sempre
+OK    CNN Brasil                   items= 60  dated= 60  | PSDB, partido de FHC, critica exposição do ex-
+OK    Estadão                      items=100  dated=100  (candidata 1/2)  | Bill Gates, Bezos e mais: relembre outros CEOs
+OK    Exame                        items= 25  dated= 25  | 'Ninguém tem mais autoridade do que nós', diz 
+OK    Folha de S.Paulo             items=100  dated=100  | Conselho da Braskem discute novas propostas de
+OK    Folha de S.Paulo             items=100  dated=100  | Governo Lula pode deixar alunos sem parte dos 
+OK    Folha de S.Paulo             items=100  dated=100  | Por que seu cérebro precisa de momentos de des
+OK    G1 Economia                  items=100  dated=100  | Congresso aprova projeto que autoriza governo 
+OK    G1 Educação                  items=100  dated=100  | Fuvest divulga notas de corte da 1ª fase; conf
+OK    Healthcare Management        items=  3  dated=  3  | Healthcare Insights realiza 11ª edição em São 
+OK    InfoMoney                    items= 10  dated= 10  | MP da Paraíba prevê gastos de mais de R$ 12 mi
+OK    InvestNews                   items= 30  dated= 30  | Prometheus: como funciona a inteligência artif
+OK    JOTA                         items= 25  dated= 25  | STF AO VIVO – Crimes patrimoniais contra famil
+OK    Lauro Jardim                 items=100  dated=100  | Trabuco vai suceder Jorge Gerdau na presidênci
+OK    Medicina S/A                 items= 10  dated= 10  | Mayo Clinic estuda a radioterapia com minifeix
+OK    Metrópoles                   items= 20  dated= 20  | OAB-DF pede que tribunais priorizem pagamentos
+OK    Money Times                  items= 10  dated= 10  | Kapitalo reduz aposta no Brasil e vê deteriora
+OK    NeoFeed                      items= 10  dated= 10  | A “tempestade” no Banco do Brasil, com queda n
+OK    O Globo                      items=100  dated=100  (candidata 1/2)  | Papa Leão XIV pede 'reparação' diante dos abus
+OK    Panorama Farmacêutico        items= 10  dated= 10  | Panvel projeta fechar 2026 com 40 inaugurações
+OK    Poder360                     items= 10  dated= 10  | Lula cobra Trump e europeus por financiamento 
 OK    Portal Hospitais Brasil      items= 10  dated= 10  | Artigo – Paciente oncológico com tratamento ne
-OK    Saúde Business               items= 10  dated= 10  | A saúde do futuro não vai te otimizar; vai te 
-OK    Setor Saúde                  items= 10  dated= 10  | HCPA inaugura dia 10 centro oncológico que pod
-OK    Seu Dinheiro                 items= 10  dated= 10  | Ford, Claro, Heinz e Vale: o que essas gigante
-OK    UOL Economia                 items= 15  dated=  0  | Quem é Ricardo Magro, suspeito de liderar esqu
-OK    Valor Econômico              items=100  dated=100  | Operação contra Grupo Refit apreendeu aeronave
-OK    Valor Econômico              items=100  dated=100  | Tesouro de Varna revela as primeiras joias de 
+OK    Saúde Business               items= 10  dated= 10  | Autenticidade na construção do posicionamento 
+OK    Setor Saúde                  items= 10  dated= 10  | CNSaúde e associação de beneficiários cobram p
+OK    Seu Dinheiro                 items= 10  dated= 10  | Hapvida (HAPV3) dispara 15% após balanço: o qu
+OK    UOL Economia                 items= 15  dated=  0  | Congresso aprova liberação de R$ 149,4 bi para
+OK    Valor Econômico              items=100  dated=100  | Aumento de custos preocupa Votorantim Cimentos
+OK    Valor Econômico              items=100  dated=100  | Cryopraxis preserva gordura de lipoaspiração
 
 ====================================================================================================
 SCRAPERS HTML
 ====================================================================================================
-OK    ANAHP                             items=  5  dated=  0  | Hospital Sepaco inaugura Centro de Infusão e amplia 
-OK    CADE                              items= 30  dated= 30  | Conheça o SEI, sistema que gerencia os processos do 
+OK    ANAHP                             items=  5  dated=  0  | Hospital Santa Rita promove I Simpósio Multidiscipli
+OK    CADE                              items= 30  dated= 30  | Pauta da próxima sessão de julgamento (18/11) do Cad
 OK    IESS                              items=  1  dated=  0  | Pôster do Prêmio IESS
 OK    INEP                              items= 10  dated=  5  | Avaliação da Alfabetização
+OK    MEC                               items= 20  dated= 20  | Futuro em Construção: podcast mostra como a EPT gera
 VAZIO ANVISA                       0 artigos casaram o href_re — padrão de URL mudou?
-VAZIO MEC                          0 artigos casaram o href_re — padrão de URL mudou?
 
 ====================================================================================================
 FONTES PRIMÁRIAS
 ====================================================================================================
-OK    DOU — Diário Oficial              items= 57  | Despacho — DESPACHO DECISÓRIO Nº 64/GAB1/CADE, DE 6 
-OK    CVM — Fato Relevante              items= 98  | DIAGNOSTICOS DA AMERICA S.A. — ITR - Informações Tri
+OK    DOU — Diário Oficial              items= 46  | Pauta — PAUTA DA 276ª SESSÃO ORDINÁRIA DE JULGAMENTO
+OK    CVM — Fato Relevante              items=132  | DIAGNOSTICOS DA AMERICA S.A. — ITR - Informações Tri
 
 ====================================================================================================
-RESUMO: 37 OK · 2 VAZIO · 2 ERRO  (total 41)
+RESUMO: 38 OK · 1 VAZIO · 2 ERRO  (total 41)
 ====================================================================================================
 VAZIO/ERRO não quebram o pipeline, mas somem em silêncio no dia a dia.
 Comente a fonte no arquivo correspondente ou corrija o href_re/URL.
